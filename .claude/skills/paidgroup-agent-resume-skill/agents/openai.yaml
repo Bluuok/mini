@@ -1,0 +1,4 @@
+interface:
+  display_name: "付费群三项目简历与面试"
+  short_description: "面向 MiniCode / Craft Agents / HappyClaw 三项目：简历项目生成（项目描述+四段式 bullet）、JD 场景化对齐、面试 Q&A 预测、8 模块项目故事 + Agent 方法论九阶段开发故事、对抗式审查、CodeWiki 深挖；并可酥化经历（/asu）、制作可编辑 HTML 简历（/resume）、复刻 ASu 同款简历（/asu-resume）并导出 PDF。"
+  default_prompt: "帮我包装我的三项目经历。按需选择：简历项目生成、粘贴 JD 做场景化对齐、面试 Q&A 预测、项目故事生成（含方法论开发故事）；文字确认后说 /resume 或 /asu-resume 生成可编辑 HTML 简历并导出 PDF。"

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Agent 学习资源库 · 在线阅读</title>
+    <meta
+      name="description"
+      content="Agent 学习资源库：三十天速成计划、Pi Agent 架构导读，以及 Miniclaw / TinyCode / HappyClaw / Craft Agents 四个 Agent 项目的文字版精讲与零基础图解版，GitBook 式连续阅读。"
+    />
+    <script>
+      (() => {
+        let theme;
+        try {
+          const saved = localStorage.getItem("paid-docs-theme");
+          if (saved === "light" || saved === "dark") theme = saved;
+        } catch {}
+        theme ??= matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", theme === "dark" ? "#000000" : "#ffffff");
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-D7nP3xNn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DMjpeEGO.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

@@ -1,18 +1,4 @@
-# 本地 agent / IDE 配置
-.claude/
-.vscode/
-.idea/
-
-# 依赖与构建产物
-node_modules/
-dist/
-build/
-.next/
-out/
-__pycache__/
-*.py[cod]
-.venv/
-venv/
+# 只排除密钥、系统垃圾和依赖，其余全部纳入版本管理
 
 # 环境与密钥（.env.example 保留）
 .env
@@ -28,5 +14,9 @@ credentials.json
 .DS_Store
 Thumbs.db
 desktop.ini
+__MACOSX/
 *.log
 *.tmp
+
+# 依赖目录（本仓库当前无此目录，留作保险）
+node_modules/
