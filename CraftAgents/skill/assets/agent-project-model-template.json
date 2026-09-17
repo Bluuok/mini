@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project": "craft-agents",
+  "target_role": "Agent 应用工程师",
+  "scenario": "base",
+  "artifacts": [
+    {
+      "id": "artifact-craft-001",
+      "support_points": ["R18"],
+      "agent_layer": "External Knowledge",
+      "core_concept": "MCP / Tool Calling",
+      "problem": "多来源能力接入时工具协议、凭据与权限配置分散。",
+      "implementation": "使用 ServerBuilder 将 MCP、API 与 Local Source 转换为统一工具并注入会话上下文。",
+      "artifact": "统一能力接入层与 ServerBuilder",
+      "artifact_evidence": ["R18", "W10"],
+      "effect": "使外部能力能够通过统一工具契约被 Agent 调用。",
+      "ownership": "unknown",
+      "artifact_status": "Implemented",
+      "scenario": "base",
+      "project_source": "Craft Agents source analysis",
+      "scope_boundary": "业务工具体需另行实现；统一接入层不等于内置金融或电商工具。",
+      "interview_artifact": ["ServerBuilder 转换逻辑", "工具 Schema", "权限配置"],
+      "agent_relevance": "agent_core"
+    }
+  ],
+  "coverage": {
+    "knowledge_tool": "covered",
+    "harness": "weak",
+    "runtime_or_memory": "absent",
+    "eval": "absent",
+    "workflow": "not_applicable"
+  }
+}

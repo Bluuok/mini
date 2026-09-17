@@ -1,0 +1,4 @@
+interface:
+  display_name: "Craft Agents Resume"
+  short_description: "生成带 Claim 证据追踪的 Craft Agents 简历项目，支持场景对齐与面试验证闭环"
+  default_prompt: "帮我根据我的背景，用 Craft Agents 生成带 Claim 证据追踪的高阶 Agent 架构项目经历。如果我有目标岗位 JD，先通过行业族和具体场景 route 做渐进式场景选择，再做场景化对齐；如果需要面试准备，支持预测、逐题模拟、复盘和弱项复练；如果需要讲清楚项目迭代和负责板块，可以生成项目故事。"

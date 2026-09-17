@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "session": {
+    "session_id": "session-local-id",
+    "role": "Agent 应用工程师",
+    "round": "技术面",
+    "duration_minutes": 30,
+    "feedback_policy": "deferred",
+    "hint_policy": "on_request",
+    "max_followups_per_claim": 4,
+    "updated_at": "2026-09-13"
+  },
+  "claims": [
+    {
+      "claim_id": "claim-miniclaw-001",
+      "status": "partial",
+      "evidence_found": ["说明了四段 Prompt 的分工"],
+      "missing": ["没有说明上下文预算的失败处理"],
+      "contradictions": [],
+      "followup_depth": 1,
+      "last_question_id": "claim-miniclaw-001-01"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project": "craft-agents",
+  "source_kind": "skill_reference_archive",
+  "archive": {
+    "workspace_relative_path": "references/craft-agents-oss-main.zip",
+    "skill_relative_path": "references/craft-agents-oss-main.zip",
+    "root_directory": "craft-agents-oss-main/",
+    "sha256": "ba48c941238e5fcf6ef6412c7fd53b30c863220ea81395e368013c38eb054871",
+    "file_count": 1877,
+    "snapshot_date": "2026-08-06",
+    "source_commit": "8981384b"
+  },
+  "indexes": {
+    "codewiki": "references/codewiki-index.md",
+    "manual": "references/Craft-Agents-中文技术手册.md",
+    "navigation": "references/evidence-navigation.md"
+  },
+  "entrypoints": [
+    "packages/shared/src/agent/base-agent.ts",
+    "packages/shared/src/agent/backend/factory.ts",
+    "packages/shared/src/agent/core/pre-tool-use.ts",
+    "packages/shared/src/sources/server-builder.ts",
+    "packages/pi-agent-server/src/index.ts",
+    "packages/server-core/src/handlers/rpc/sessions.ts"
+  ],
+  "resolution_policy": [
+    "先校验 archive sha256；哈希不匹配时不得把旧索引当作当前源码证据。",
+    "先读 codewiki-index，再按问题读取中文技术手册或 DeepWiki 对应章节，最后用源码包核验关键实现。",
+    "源码路径必须写成 Project-relative path，并尽量补充符号名或测试文件。",
+    "场景只增加问题、Failure Mode 和 Domain Artifact，不复制或改写基座源码事实。"
+  ]
+}

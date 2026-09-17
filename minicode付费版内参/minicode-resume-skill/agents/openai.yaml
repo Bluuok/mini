@@ -1,0 +1,4 @@
+interface:
+  display_name: "MiniCode Resume"
+  short_description: "根据用户背景生成 MiniCode 简历项目，支持场景化对齐和面试 Q&A 预测。"
+  default_prompt: "帮我根据我的背景，用 MiniCode 生成简历项目经历。如果我有目标岗位 JD，可以同时做场景化对齐和面试 Q&A 预测。如果需要讲清楚项目迭代和负责板块，可以生成项目故事。"

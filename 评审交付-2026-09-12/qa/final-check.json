@@ -1,0 +1,25 @@
+{
+  "original_files_checked": 16,
+  "changed_originals": [],
+  "local_links_checked": 52,
+  "link_issues": [],
+  "documents": [
+    {
+      "name": "01-综合评审.md",
+      "characters": 15003,
+      "lines": 241
+    },
+    {
+      "name": "02-改进PR提案.md",
+      "characters": 7506,
+      "lines": 195
+    },
+    {
+      "name": "03-简历与故事改写建议.md",
+      "characters": 5737,
+      "lines": 212
+    }
+  ],
+  "pr_proposals": 8,
+  "interview_sections": 3
+}

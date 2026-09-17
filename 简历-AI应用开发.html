@@ -1,0 +1,159 @@
+<!doctype html>/
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>个人简历 · AI 应用开发</title>
+  <style>
+    :root { --page-width: 210mm; --page-height: 297mm; --accent: #2F5597; }
+    @page { size: 210mm 297mm; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #eef1f5; }
+    body { color: #111; font-family: "Microsoft YaHei", "微软雅黑", "Noto Sans CJK SC", Arial, sans-serif; }
+    .toolbar { width: var(--page-width); margin: 12px auto 8px; display: flex; justify-content: flex-end; gap: 6px; padding: 8px; border: 1px solid #d7dce3; border-radius: 8px; background: #fff; box-shadow: 0 3px 12px rgba(0,0,0,.12); }
+    .toolbar button { border: 0; border-radius: 5px; padding: 7px 10px; color: #fff; background: var(--accent); font-size: 13px; cursor: pointer; }
+    .toolbar button.secondary { color: var(--accent); background: #eef3fb; }
+    .toolbar-control { display:flex; align-items:center; gap:4px; color:#596273; font-size:12px; white-space:nowrap; }
+    .toolbar-control select { border:1px solid #cbd4df; border-radius:5px; padding:6px 7px; color:var(--accent); background:#fff; font:inherit; }
+    .toolbar-control input[type=color] { width:32px; height:29px; padding:2px; border:1px solid #cbd4df; border-radius:5px; background:#fff; cursor:pointer; }
+    .toolbar-status { color: #596273; font-size: 12px; }
+    .page { width: var(--page-width); min-height: var(--page-height); margin: 0 auto; padding: 10mm 12mm 8mm; background: #fff; }
+    .page + .page { margin-top: 8mm; }
+    .header { display: flex; justify-content: space-between; gap: 8mm; min-height: 34mm; margin-bottom: 5mm; }
+    .header-copy { flex: 1; }
+    .name { margin: 0 0 3mm; font-size: 22pt; line-height: 1.05; font-weight: 700; }
+    .meta, .contact { font-size: 10.5pt; line-height: 1.55; white-space: pre-wrap; }
+    .contact { line-height: 1.35; }
+    .photo { flex: 0 0 24mm; width: 24mm; height: 34mm; display: flex; align-items: center; justify-content: center; overflow: hidden; border: .3mm solid #d9d9d9; color: #888; font-size: 9pt; text-align:center; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .section { margin-bottom: 4mm; }
+    .section-title { margin: 0 0 2.2mm; padding: 0 0 1.4mm; color: var(--accent); border-bottom: .55mm solid var(--accent); font-size: 14pt; line-height: 1; font-weight: 700; }
+    .row { display: grid; grid-template-columns: 5cm 1fr 4.2cm; gap: 2mm; font-size: 10.5pt; line-height: 1.5; font-weight: 700; }
+    .role-row { display: grid; grid-template-columns: 4.6cm 1fr auto; gap: 2mm; margin-bottom: 1.6mm; font-size: 10pt; line-height: 1.35; font-weight: 700; }
+    .body { font-size: 9.8pt; line-height: 1.36; }
+    .bullet { display: grid; grid-template-columns: 4mm 1fr; gap: 1mm; margin-bottom: 1.3mm; }
+    .marker { font-size: 10.5pt; line-height: 1.32; }
+    .label { font-weight: 700; }
+    .project-summary { margin: 0 0 1.6mm; }
+    .pending { color: #b06000; }
+    @media print { html, body { background: #fff; } .toolbar { display: none !important; } .page { margin: 0; box-shadow:none; } .page + .page { page-break-before: always; margin-top: 0; } }
+    @media screen and (max-width: 840px) { .toolbar { width: 100%; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar" role="toolbar" aria-label="简历编辑工具" contenteditable="false">
+    <button id="editButton" type="button">编辑</button>
+    <label class="toolbar-control">字体<select id="fontSelect" aria-label="字体"><option value="Microsoft YaHei">微软雅黑</option><option value="SimSun">宋体</option><option value="SimHei">黑体</option><option value="Arial">Arial</option><option value="Georgia">Georgia</option></select></label>
+    <label class="toolbar-control">文字颜色<input id="colorInput" type="color" value="#111111" aria-label="文字颜色"></label>
+    <button id="boldButton" data-action="bold" type="button" title="对选中文字加粗或取消加粗"><strong>B</strong> 加粗</button>
+    <button id="photoButton" class="secondary" type="button">替换照片</button>
+    <button id="exportButton" type="button">导出PDF</button>
+    <input id="photoInput" type="file" accept="image/*" hidden>
+    <span id="toolbarStatus" class="toolbar-status" aria-live="polite"></span>
+  </div>
+
+  <!-- ============ 第 1 页 ============ -->
+  <main id="resumePage" class="page">
+    <header class="header">
+      <div class="header-copy">
+        <h1 class="name"><span class="pending">【待补充姓名】</span></h1>
+        <div class="meta">求职意向：AI 应用开发工程师（Agent / LLM 应用方向）    <span class="pending">【待补充：出生年月】</span></div>
+        <div class="meta">英语水平：<span class="pending">【待补充 CET 等】</span></div>
+        <div class="contact">电话：<span class="pending">【待补充】</span> | 邮箱：<span class="pending">【待补充】</span> | GitHub/作品集：<span class="pending">【待补充】</span></div>
+      </div>
+      <div id="photoBox" class="photo">替换照片</div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">教育背景</h2>
+      <div class="row"><span><span class="pending">【待补充学校】</span></span><span><span class="pending">【待补充专业（本科）】</span></span><span><span class="pending">【待补充起止时间】</span></span></div>
+      <div class="body bullet"><span class="marker">•</span><div>主修课程 / GPA / 排名：<span class="pending">【待补充，可留空删除此行】</span></div></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">实习经历</h2>
+      <div class="role-row"><span><span class="pending">【待补充起止时间】</span></span><span><span class="pending">【待补充公司名】</span></span><span><span class="pending">【待补充岗位名】实习生</span></span></div>
+      <div class="body">
+        <p class="project-summary"><span class="label">研发项目智能协作助手</span>——面向研发团队的项目资料与文档协作 Agent，利用 LLM Tool Calling 编排文件搜索、读取、汇总与受控写入，支持多步骤任务执行、写前确认与会话恢复。</p>
+        <p class="project-summary"><span class="label">技术栈：</span>TypeScript、Node.js、LLM API（Tool Calling）、JSON Schema / Zod、JSONL 事件流</p>
+        <div class="bullet"><span class="marker">•</span><div>针对项目周报整理、跨文件资料汇总等多步骤文档任务难以通过单次模型调用完成、执行过程缺乏统一终止条件的问题，基于模型-工具-模型循环的 Agent 执行模式，参与实现 Agent 执行循环（协调模型推理、工具调用、结果回填与最大步数终止保护），实现了多步骤文档任务的闭环执行与终止可控。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对模型输出到文件工具执行之间缺乏参数契约与校验、错误参数易直接作用于文件系统的问题，基于 JSON Schema 与注册表模式，参与设计并实现统一的工具定义与注册调度契约（为文件列举、搜索、读取、写入与 diff 应用等工具提供参数描述、运行时校验与统一执行入口），实现了工具调用的统一校验与受控调度。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对项目资料逐渐增多、跨文件查找时无界读取导致上下文与成本失控的问题，基于受控观察设计，实现了面向项目资料目录的文件工具（目录列举、关键词搜索、分页读取，配合工作目录限制、路径规范化与单次输出规模上限），控制了 Agent 单次读取规模并支持按需续读。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对 AI 直接修改团队共用文档存在静默误改风险的问题，参与实现文件写入工具的写前确认机制（修改先生成统一 diff 预览，用户确认后才执行写入，确认动作由用户完成而非模型自行通过），降低了文档误改风险。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对文档整理任务可能跨次执行中断、修改过程需要回看依据的问题，参与实现基于 JSONL 事件流的会话记录机制（逐事件记录消息、工具调用与结果，支持从历史事件恢复会话、基于已有事件创建单用户探索分支），实现了任务的可恢复与操作过程的可回溯。</div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 第 2 页 ============ -->
+  <main class="page">
+    <section class="section">
+      <h2 class="section-title">项目经历（一）</h2>
+      <div class="role-row"><span>个人项目</span><span>Craft Agents · 多端 Agent 工作台</span><span><span class="pending">【待补充时间】</span></span></div>
+      <div class="body">
+        <p class="project-summary">面向深度研究（搜索→阅读→分析→汇总）与信息分析场景的多端 Agent 工作台，把研究任务做成可配置、可运行、可接入、可复用的 AI 应用。</p>
+        <p class="project-summary"><span class="label">技术栈：</span>TypeScript、React、Electron、Bun/Node（Bun workspace）、WebSocket/RPC、MCP</p>
+        <div class="bullet"><span class="marker">•</span><div>针对深度研究流程不同阶段需要不同模型（信息抓取整理要求快与低成本、分析综合要求强推理能力）、前端耦合单一模型 SDK 导致按任务更换模型或增换模型服务商均需改动整个调用链的问题，基于抽象接口，设计了 AgentBackend 抽象（将 Claude、Pi 等不同模型后端统一为 provider-agnostic 的 chat() 接口），实现了 UI 层与模型供应商的解耦、后端切换收敛为配置层改动。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对多个研究任务并行推进时搜索结果、网页原文、中间结论与偏好配置在单一上下文中互相混杂、结论不可信且任务无法并行推进的问题，基于 Session/Workspace 隔离设计，设计了以 Session 与 Workspace 为边界的状态隔离体系（管理会话生命周期、工作目录、偏好配置与工具上下文），实现了多研究任务的并行隔离（一个研究任务一个 Session 与独立工作区）。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对搜索 API、网页抓取、本地文档、MCP 工具等第三方研究能力各自为政接入、凭据与配置散落、每接入一个能力需改造一遍代码的问题，基于 ServerBuilder 统一转换，设计了统一能力接入层（MCP/API/本地数据源统一转换为 Agent 可调用工具，凭据注入与权限配置集中管理），实现了外部研究能力的统一接入与调用。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对研究工作台需同时覆盖桌面端主力工作与 Web 端随时接续、两端各自维护一套会话/文件/模型连接逻辑导致功能不同步、维护成本翻倍的问题，基于统一 RPC 抽象，设计了 IPC/WebSocket 统一传输层（统一 RPC channel、DTO 与路由规则），实现了同一套会话、文件与模型连接逻辑的多端复用。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对深度研究任务执行链路长（搜索→阅读→分析→汇总常达分钟级）、执行中文本增量、工具进度、权限确认与外部来源错误（搜索 API 超时、网页抓取失败等）混杂呈现、缺乏统一事件契约导致 UI 解析逻辑分散且错误难以恢复的问题，基于可辨识联合类型，设计了 AgentEvent 事件流协议（文本增量、工具启动/结果、权限请求、结构化错误与完成状态），实现了执行过程的标准化实时呈现与结构化错误的统一恢复入口。</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">项目经历（二）</h2>
+      <div class="role-row"><span>个人项目</span><span>HappyClaw · 数字员工工作站</span><span><span class="pending">【待补充时间】</span></span></div>
+      <div class="body">
+        <p class="project-summary">面向跨境电商场景的自托管 AI 数字员工平台，把数字员工的人设治理、IM 与定时双入口值守、认证授权与权限保障做成可控、可运行、可信赖的 AI 应用。</p>
+        <p class="project-summary"><span class="label">技术栈：</span>TypeScript、Node.js、Hono、SQLite、React、Docker、WebSocket、Claude Agent SDK</p>
+        <div class="bullet"><span class="marker">•</span><div>针对跨境电商客户咨询散落在飞书、WhatsApp、Telegram 等多个 IM 渠道、逐渠道对接 SDK 使 Agent 核心耦合渠道差异、每扩展一个渠道都要改造一遍接入代码的问题，基于适配器模式，设计了 IMChannel 统一接口（七渠道统一抽象与统一收发接口），实现了 Agent 核心不感知渠道差异、新渠道接入收敛为适配器级改动。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对跨境电商日常运营中异常巡检、库存与汇率提醒等重复性动作依赖人工按时执行、跨时区易漏做迟做，以及自托管部署多副本时定时任务重复执行与并发竞争的问题，基于租约互斥与不可重入调度，设计了 Occurrence Materialization 定时任务调度器（cron 最小 60s/interval/once 三类型、SQLite 租约互斥 lease_owner/lease_token、循环 pump 调度驱动），实现了数字员工定时值守的安全调度与多实例互斥。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对数字员工人设依赖散装 Prompt、缺乏结构化约束、修改无安全确认导致单次改动引发行为失控的问题，基于四段正交 Prompt 工程，设计了 Agent Profile 四段式 Prompt（IDENTITY/SOUL/AGENTS/TOOLS、append/replace 双模式、两阶段 AI 辅助与确认短语安全流程），实现了数字员工人设的可控管理与一致行为。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对面向多角色共用工作区的授权治理中访问/修改/删除权限无分级规则、管理员权限过大缺乏制衡导致越权操作难防范的问题，基于 RBAC 三态模型与渠道身份匹配，设计了权限体系（canAccessGroup/canModifyGroup/canDeleteGroup 三态分离、admin 不自动 bypass 工作区所有权、IM Owner Gate 渠道身份比对 owner_im_id），实现了读/改/删分级管控可落地与工作区数据归属清晰。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对跨境电商数字员工平台管理后台（配置渠道、人设与权限的入口）的登录会话 Cookie 可伪造、登录接口可被爆破导致后台被未认证进入的问题，基于 HMAC 签名与双层限流，设计了 Cookie Session 认证体系（服务端生成随机 token 存会话表、HMAC 签名作防篡改兜底、常量时间比较防时序攻击、__Host- 前缀 Secure Cookie、per-IP + per-username 双层限流），实现了后台登录的认证加固与接口爆破的限流防护。</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">技能特长</h2>
+      <div class="body">
+        <div class="bullet"><span class="marker">•</span><div><span class="label">编程开发：</span>熟练使用 TypeScript / Node.js，掌握 React、Git、Docker 与常见服务部署流程；理解 Agent 执行循环与工具调用链路，能独立完成 LLM 应用从接入到验证的完整开发。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><span class="label">Agent / LLM 工程：</span>掌握 Tool Calling 工具契约设计（JSON Schema 校验）、Session 状态隔离、MCP 能力接入（统一转换层）、AgentEvent 统一事件流（可辨识联合类型、流式渲染与结构化错误恢复）；理解 Agent 行为评测的方法论边界。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><span class="label">工程素养：</span>事件契约与结构化错误恢复设计、统一传输层复用（RPC channel/DTO/路由分类穷举）、写前确认等安全机制设计、类型检查与契约级测试；习惯以定性证据与边界诚实呈现工程成果。</div></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const pages = Array.from(document.querySelectorAll('.page'));
+      const page = document.getElementById('resumePage');
+      const edit = document.getElementById('editButton');
+      const photoBox = document.getElementById('photoBox');
+      const input = document.getElementById('photoInput');
+      const status = document.getElementById('toolbarStatus');
+      const fontSelect = document.getElementById('fontSelect');
+      const colorInput = document.getElementById('colorInput');
+      const boldButton = document.getElementById('boldButton');
+      let savedRange = null;
+      document.addEventListener('selectionchange', () => { const s = window.getSelection(); if (s && s.rangeCount && pages.some(p => p.contains(s.anchorNode))) savedRange = s.getRangeAt(0).cloneRange(); });
+      const restoreSelection = () => { if (!savedRange) return; const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(savedRange); };
+      const applyFormat = (command, value = null) => { if (!page.isContentEditable) edit.click(); page.focus(); restoreSelection(); document.execCommand(command, false, value); };
+      edit.onclick = () => {
+        const on = !pages[0].isContentEditable;
+        pages.forEach(p => { p.contentEditable = String(on); p.spellcheck = false; });
+        edit.textContent = on ? '完成编辑' : '编辑';
+        edit.classList.toggle('secondary', on);
+        status.textContent = on ? '两页均可直接点击修改' : '';
+        if (on) page.focus();
+      };
+      fontSelect.onchange = () => applyFormat('fontName', fontSelect.value);
+      colorInput.oninput = () => applyFormat('foreColor', colorInput.value);
+      boldButton.onclick = () => applyFormat('bold');
+      document.getElementById('photoButton').onclick = () => input.click();
+      input.onchange = () => { const f = input.files && input.files[0]; if (!f || !f.type.startsWith('image/')) return; const r = new FileReader(); r.onload = () => { photoBox.innerHTML = `<img src="${r.result}" alt="照片">`; status.textContent = '照片已替换'; }; r.readAsDataURL(f); };
+      document.getElementById('exportButton').onclick = () => { status.textContent = '打印设置：A4 · 缩放100% · 开启背景图形 · 关闭页眉页脚 · 另存为 PDF'; window.print(); };
+    })();
+  </script>
+</body>
+</html>

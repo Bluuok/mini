@@ -1,0 +1,120 @@
+{
+  "title": "个人简历 · AI 应用开发",
+  "viewport": {
+    "width": 1200,
+    "height": 1000,
+    "scrollWidth": 1200,
+    "scrollHeight": 2451
+  },
+  "links": [],
+  "typography": [
+    {
+      "tag": "H1",
+      "fontSize": "29.3333px",
+      "lineHeight": "30.8px",
+      "chars": 7,
+      "top": 129,
+      "height": 31
+    },
+    {
+      "tag": "H2",
+      "fontSize": "18.6667px",
+      "lineHeight": "18.6667px",
+      "chars": 4,
+      "top": 276,
+      "height": 26
+    },
+    {
+      "tag": "H2",
+      "fontSize": "18.6667px",
+      "lineHeight": "18.6667px",
+      "chars": 4,
+      "top": 365,
+      "height": 26
+    },
+    {
+      "tag": "P",
+      "fontSize": "13.0667px",
+      "lineHeight": "17.7707px",
+      "chars": 93,
+      "top": 423,
+      "height": 36
+    },
+    {
+      "tag": "P",
+      "fontSize": "13.0667px",
+      "lineHeight": "17.7707px",
+      "chars": 72,
+      "top": 465,
+      "height": 18
+    },
+    {
+      "tag": "H2",
+      "fontSize": "18.6667px",
+      "lineHeight": "18.6667px",
+      "chars": 7,
+      "top": 1282,
+      "height": 26
+    },
+    {
+      "tag": "P",
+      "fontSize": "13.0667px",
+      "lineHeight": "17.7707px",
+      "chars": 70,
+      "top": 1340,
+      "height": 36
+    },
+    {
+      "tag": "P",
+      "fontSize": "13.0667px",
+      "lineHeight": "17.7707px",
+      "chars": 71,
+      "top": 1381,
+      "height": 18
+    },
+    {
+      "tag": "H2",
+      "fontSize": "18.6667px",
+      "lineHeight": "18.6667px",
+      "chars": 7,
+      "top": 1759,
+      "height": 26
+    },
+    {
+      "tag": "P",
+      "fontSize": "13.0667px",
+      "lineHeight": "17.7707px",
+      "chars": 75,
+      "top": 1818,
+      "height": 36
+    },
+    {
+      "tag": "P",
+      "fontSize": "13.0667px",
+      "lineHeight": "17.7707px",
+      "chars": 74,
+      "top": 1859,
+      "height": 18
+    },
+    {
+      "tag": "H2",
+      "fontSize": "18.6667px",
+      "lineHeight": "18.6667px",
+      "chars": 4,
+      "top": 2237,
+      "height": 26
+    }
+  ],
+  "scripts": 1,
+  "print": {
+    "styles": [
+      "@page { size: 210mm 297mm; margin: 0px; }",
+      "@media print {\n  html, body { background: rgb(255, 255, 255); }\n  .toolbar { display: none !important; }\n  .page { margin: 0px; box-shadow: none; }\n  .page + .page { break-before: page; margin-top: 0px; }\n}"
+    ]
+  },
+  "mobile": {
+    "width": 390,
+    "scrollWidth": 794,
+    "height": 2501
+  }
+}

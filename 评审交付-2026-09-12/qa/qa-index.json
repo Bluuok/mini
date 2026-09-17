@@ -1,0 +1,49 @@
+{
+  "method": "Edge 153 headless; local HTML; external network blocked; JavaScript disabled; A4; preferCSSPageSize=true",
+  "qa_files": [
+    {
+      "name": "inspect-resume.cjs",
+      "bytes": 3002
+    },
+    {
+      "name": "layout-metrics.json",
+      "bytes": 2418
+    },
+    {
+      "name": "original-desktop.png",
+      "bytes": 387162
+    },
+    {
+      "name": "original-mobile.png",
+      "bytes": 369181
+    },
+    {
+      "name": "original-print-proof.pdf",
+      "bytes": 280052
+    },
+    {
+      "name": "pdf-text-check.json",
+      "bytes": 1868
+    },
+    {
+      "name": "print-page-1.png",
+      "bytes": 341170
+    },
+    {
+      "name": "print-page-2.png",
+      "bytes": 6823
+    },
+    {
+      "name": "print-page-3.png",
+      "bytes": 752478
+    },
+    {
+      "name": "print-page-4.png",
+      "bytes": 41040
+    },
+    {
+      "name": "source-manifest.json",
+      "bytes": 2662
+    }
+  ]
+}

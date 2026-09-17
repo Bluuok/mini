@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "profile": {
+    "candidate_id": "candidate-local-id",
+    "target_roles": ["Agent 应用工程师"],
+    "mastery_level": "L2",
+    "risk_preference": "balanced",
+    "updated_at": "2026-09-13"
+  },
+  "claims": [
+    {
+      "id": "claim-craft-001",
+      "project": "craft-agents",
+      "artifact_refs": ["artifact-craft-001"],
+      "support_points": ["R03"],
+      "claim_types": ["technical", "architecture"],
+      "claim_basis": "project_source",
+      "source_fact": "项目通过 AgentBackend 将 ClaudeAgent 与 PiAgent 统一为 provider-agnostic 事件接口。",
+      "candidate_wording": "项目通过 AgentBackend 建立多后端抽象与统一事件接口。",
+      "sources": [
+        {"type": "project-source", "location": "W03 / W14", "public": false}
+      ],
+      "attribution_scope": "project",
+      "responsibility_level": "not_applicable",
+      "result_type": "deliverable",
+      "verification_status": "pending",
+      "allowed_uses": ["audit", "resume_draft", "interview"],
+      "interview_details": {
+        "decisions": ["为什么抽象 AgentBackend", "为什么统一 AgentEvent"],
+        "difficulties": ["不同 SDK 的事件与工具代理方式不一致"],
+        "verification": ["后端事件映射", "统一接口契约"],
+        "result": "形成可替换后端与上层解耦的接口边界"
+      },
+      "boundary": "AgentBackend 是后端抽象，不等于完整 Runtime；工具权限与会话调度由其他模块承担。",
+      "risk_notes": [],
+      "last_verified": "2026-09-13"
+    }
+  ]
+}
