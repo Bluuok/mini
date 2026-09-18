@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>个人简历 · AI 应用开发</title>
+  <style>
+    :root { --page-width: 210mm; --page-height: 297mm; --accent: #2F5597; }
+    @page { size: 210mm 297mm; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #eef1f5; }
+    body { color: #111; font-family: "Microsoft YaHei", "微软雅黑", "Noto Sans CJK SC", Arial, sans-serif; }
+    .toolbar { width: var(--page-width); margin: 12px auto 8px; display: flex; justify-content: flex-end; gap: 6px; padding: 8px; border: 1px solid #d7dce3; border-radius: 8px; background: #fff; box-shadow: 0 3px 12px rgba(0,0,0,.12); }
+    .toolbar button { border: 0; border-radius: 5px; padding: 7px 10px; color: #fff; background: var(--accent); font-size: 13px; cursor: pointer; }
+    .toolbar button.secondary { color: var(--accent); background: #eef3fb; }
+    .toolbar-control { display:flex; align-items:center; gap:4px; color:#596273; font-size:12px; white-space:nowrap; }
+    .toolbar-control select { border:1px solid #cbd4df; border-radius:5px; padding:6px 7px; color:var(--accent); background:#fff; font:inherit; }
+    .toolbar-control input[type=color] { width:32px; height:29px; padding:2px; border:1px solid #cbd4df; border-radius:5px; background:#fff; cursor:pointer; }
+    .toolbar-status { color: #596273; font-size: 12px; }
+    .page { width: var(--page-width); min-height: var(--page-height); margin: 0 auto; padding: 10mm 12mm 8mm; background: #fff; }
+    .page + .page { margin-top: 8mm; }
+    .header { display: flex; justify-content: space-between; gap: 8mm; min-height: 34mm; margin-bottom: 5mm; }
+    .header-copy { flex: 1; }
+    .name { margin: 0 0 3mm; font-size: 22pt; line-height: 1.05; font-weight: 700; }
+    .meta, .contact { font-size: 10.5pt; line-height: 1.55; white-space: pre-wrap; }
+    .contact { line-height: 1.35; }
+    .photo { flex: 0 0 24mm; width: 24mm; height: 34mm; display: flex; align-items: center; justify-content: center; overflow: hidden; border: .3mm solid #d9d9d9; color: #888; font-size: 9pt; text-align:center; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .section { margin-bottom: 4mm; }
+    .section-title { margin: 0 0 2.2mm; padding: 0 0 1.4mm; color: var(--accent); border-bottom: .55mm solid var(--accent); font-size: 14pt; line-height: 1; font-weight: 700; }
+    .row { display: grid; grid-template-columns: 5cm 1fr 4.2cm; gap: 2mm; font-size: 10.5pt; line-height: 1.5; font-weight: 700; }
+    .role-row { display: grid; grid-template-columns: 4.6cm 1fr auto; gap: 2mm; margin-bottom: 1.6mm; font-size: 10pt; line-height: 1.35; font-weight: 700; }
+    .body { font-size: 9.8pt; line-height: 1.36; }
+    .bullet { display: grid; grid-template-columns: 4mm 1fr; gap: 1mm; margin-bottom: 1.3mm; }
+    .marker { font-size: 10.5pt; line-height: 1.32; }
+    .label { font-weight: 700; }
+    .project-summary { margin: 0 0 1.6mm; }
+    .pending { color: #b06000; }
+    @media print { html, body { background: #fff; } .toolbar { display: none !important; } .page { margin: 0; box-shadow:none; } .page + .page { page-break-before: always; margin-top: 0; } }
+    @media screen and (max-width: 840px) { .toolbar { width: 100%; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar" role="toolbar" aria-label="简历编辑工具" contenteditable="false">
+    <button id="editButton" type="button">编辑</button>
+    <label class="toolbar-control">字体<select id="fontSelect" aria-label="字体"><option value="Microsoft YaHei">微软雅黑</option><option value="SimSun">宋体</option><option value="SimHei">黑体</option><option value="Arial">Arial</option><option value="Georgia">Georgia</option></select></label>
+    <label class="toolbar-control">文字颜色<input id="colorInput" type="color" value="#111111" aria-label="文字颜色"></label>
+    <button id="boldButton" data-action="bold" type="button" title="对选中文字加粗或取消加粗"><strong>B</strong> 加粗</button>
+    <button id="photoButton" class="secondary" type="button">替换照片</button>
+    <button id="exportButton" type="button">导出PDF</button>
+    <input id="photoInput" type="file" accept="image/*" hidden>
+    <span id="toolbarStatus" class="toolbar-status" aria-live="polite"></span>
+  </div>
+
+  <!-- ============ 第 1 页 ============ -->
+  <main id="resumePage" class="page">
+    <header class="header">
+      <div class="header-copy">
+        <h1 class="name"><span class="pending">【待补充姓名】</span></h1>
+        <div class="meta">求职意向：AI 应用开发工程师（Agent / LLM 应用方向）    <span class="pending">【待补充：出生年月】</span></div>
+        <div class="meta">英语水平：<span class="pending">【待补充 CET 等】</span></div>
+        <div class="contact">电话：<span class="pending">【待补充】</span> | 邮箱：<span class="pending">【待补充】</span> | GitHub/作品集：<span class="pending">【待补充】</span></div>
+      </div>
+      <div id="photoBox" class="photo">替换照片</div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">教育背景</h2>
+      <div class="row"><span><span class="pending">【待补充学校】</span></span><span><span class="pending">【待补充专业（本科）】</span></span><span><span class="pending">【待补充起止时间】</span></span></div>
+      <div class="body bullet"><span class="marker">•</span><div>主修课程 / GPA / 排名：<span class="pending">【待补充，可留空删除此行】</span></div></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">实习经历</h2>
+      <div class="role-row"><span><span class="pending">【待补充起止时间】</span></span><span><span class="pending">【待补充公司名】</span></span><span><span class="pending">【待补充岗位名】实习生</span></span></div>
+      <div class="body">
+        <p class="project-summary"><span class="label">研发项目智能协作助手</span>——面向研发团队的项目资料与文档协作 Agent，利用 LLM Tool Calling 编排文件搜索、读取、汇总与受控写入，支持多步骤任务执行、写前确认与会话恢复。</p>
+        <p class="project-summary"><span class="label">技术栈：</span>TypeScript、Node.js、LLM API（Tool Calling）、JSON Schema / Zod、JSONL 事件流</p>
+        <div class="bullet"><span class="marker">•</span><div>针对项目周报整理、跨文件资料汇总等多步骤文档任务难以通过单次模型调用完成、执行过程缺乏统一终止条件的问题，基于模型-工具-模型循环的 Agent 执行模式，参与实现 Agent 执行循环（协调模型推理、工具调用、结果回填与最大步数终止保护），实现了多步骤文档任务的闭环执行与终止可控。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对模型输出到文件工具执行之间缺乏参数契约与校验、错误参数易直接作用于文件系统的问题，基于 JSON Schema 与注册表模式，参与设计并实现统一的工具定义与注册调度契约（为文件列举、搜索、读取、写入与 diff 应用等工具提供参数描述、运行时校验与统一执行入口），实现了工具调用的统一校验与受控调度。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对项目资料逐渐增多、跨文件查找时无界读取导致上下文与成本失控的问题，基于受控观察设计，实现了面向项目资料目录的文件工具（目录列举、关键词搜索、分页读取，配合工作目录限制、路径规范化与单次输出规模上限），控制了 Agent 单次读取规模并支持按需续读。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对 AI 直接修改团队共用文档存在静默误改风险的问题，参与实现文件写入工具的写前确认机制（修改先生成统一 diff 预览，用户确认后才执行写入，确认动作由用户完成而非模型自行通过），降低了文档误改风险。</div></div>
+        <div class="bullet"><span class="marker">•</span><div>针对文档整理任务可能跨次执行中断、修改过程需要回看依据的问题，参与实现基于 JSONL 事件流的会话记录机制（逐事件记录消息、工具调用与结果，支持从历史事件恢复会话、基于已有事件创建单用户探索分支），实现了任务的可恢复与操作过程的可回溯。</div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 第 2 页 ============ -->
+  <main class="page">
+    <section class="section">
+      <h2 class="section-title">项目经历（一）</h2>
+      <div class="role-row"><span>个人项目</span><span>ThreadCove · 个人研究 Agent 工作台</span><span><span class="pending">【待补充时间】</span></span></div>
+      <div class="body">
+        <p class="project-summary">基于 Craft Agents 参考架构的个人研究工作台，面向技术选型、公开资料阅读与方案比较，使用 TypeScript 将检索取材、受限任务委派和执行记录整合到 Electron/Web 界面。</p>
+        <div class="bullet"><span class="marker">•</span><div><strong>研究工具接入与证据留存</strong> 面向技术调研中实时取材与来源回看的需求，为 Pi 后端接入 web_search、web_fetch 与 MCP 代理工具；将检索结果、来源 URL 和抓取时间保存为会话产物，并对网页读取实施地址校验、重定向复检及响应上限，使取材过程可检查、来源可回看。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>受限子 Agent 编排</strong> 面向可独立调查的子问题，实现 delegate_research，以共享并发槽、单轮任务与网络预算、叶子工具白名单约束 Pi 子代理；传播父任务取消和子任务超时，等待子任务清理并分别记录状态与来源，在常规子任务失败时保留成功分支结果。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>Context Engineering</strong> 针对 Claude 后端历史无界注入的问题，按字符预算提取近期 user/assistant/tool 文本、保留角色与时序，并以引用数据拼接当前问题，实现可供后续提问使用的有界历史桥接。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>多后端适配与进程边界</strong> 面向模型接口和运行方式差异，以 AgentBackend.chat() 统一 DeepSeek、Claude 与 Pi 的调用及生命周期接口；将 Pi SDK 置于 JSONL 子进程，工具请求代理回宿主执行，使已有后端按配置切换，同时保留各后端的能力边界。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>任务生命周期与流式恢复</strong> 针对重复提交、取消及断线后的状态歧义，通过 requestId/runId 区分受理与完成，统一消费 AgentEvent；以稳定消息 ID、累计文本快照和 JSONL 检查点保存文本及执行结果，向桌面/Web 提供一致事件入口，并在重启时将未完成任务标记为中断。</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="happyclaw-project">
+      <h2 class="section-title">项目经历（二）</h2>
+      <div class="role-row"><span>个人项目</span><span>Clawtide · 自托管数字员工工作站</span><span><span class="pending">【待补充时间】</span></span></div>
+      <div class="body">
+        <p class="project-summary">基于 HappyClaw 参考架构的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。</p>
+        <p class="project-summary"><span class="label">技术栈：</span>TypeScript、Node.js、Hono、SQLite、React、WebSocket、Claude Agent SDK</p>
+        <div class="bullet"><span class="marker">•</span><div><strong>任务物化与条件认领</strong> 针对定时任务重复触发与执行记录难以追踪的问题，基于 SQLite 唯一键和条件更新，设计了 occurrence 物化、owner/token 认领及终态记录链路，实现了发生点去重与任务状态更新的条件校验。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>Agent Profile 与配置变更</strong> 针对数字员工规则散落、局部修改易覆盖其他配置的问题，基于四段式 Prompt 与版本快照，设计了独立字段更新、历史内容恢复和草稿短语确认入口，实现了配置分段维护与历史可回看。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>IM 适配与会话接入</strong> 针对不同 IM 消息格式和会话形态难以复用的问题，基于 ImChannelAdapter 与能力声明，设计了飞书、Telegram 适配及消息规范化链路，实现了渠道消息经挂载解析进入统一执行入口，其余渠道保留为骨架。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>工作区授权与 IM 准入</strong> 针对管理角色与资源归属混用的问题，基于所有者判定和发送者身份校验，设计了读、改、删独立授权函数与 audience_mode 准入分支，实现了管理员无所有权旁路、Home 禁删及拒绝分支不执行。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>会话认证与登录限流</strong> 针对 Web 管理入口的身份冒用与重复登录尝试，基于随机会话 token、HMAC 签名和进程内计数，设计了签名核验后查库、双名 Cookie 及两层限流，实现了失效会话拒绝与账号维度的尝试约束。</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">技能特长</h2>
+      <div class="body">
+        <div class="bullet"><span class="marker">•</span><div><span class="label">编程开发：</span>熟练使用 TypeScript / Node.js，掌握 React、Git、Docker 与常见服务部署流程；理解 Agent 执行循环与工具调用链路，能独立完成 LLM 应用从接入到验证的完整开发。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><span class="label">Agent / LLM 工程：</span>掌握 Tool Calling 工具契约设计（JSON Schema 校验）、Session 状态隔离、MCP 能力接入（统一转换层）、AgentEvent 统一事件流（可辨识联合类型、流式渲染与结构化错误恢复）；理解 Agent 行为评测的方法论边界。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><span class="label">工程素养：</span>事件契约与结构化错误恢复设计、统一传输层复用（RPC channel/DTO/路由分类穷举）、写前确认等安全机制设计、类型检查与契约级测试；习惯以定性证据与边界诚实呈现工程成果。</div></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const pages = Array.from(document.querySelectorAll('.page'));
+      const page = document.getElementById('resumePage');
+      const edit = document.getElementById('editButton');
+      const photoBox = document.getElementById('photoBox');
+      const input = document.getElementById('photoInput');
+      const status = document.getElementById('toolbarStatus');
+      const fontSelect = document.getElementById('fontSelect');
+      const colorInput = document.getElementById('colorInput');
+      const boldButton = document.getElementById('boldButton');
+      let savedRange = null;
+      document.addEventListener('selectionchange', () => { const s = window.getSelection(); if (s && s.rangeCount && pages.some(p => p.contains(s.anchorNode))) savedRange = s.getRangeAt(0).cloneRange(); });
+      const restoreSelection = () => { if (!savedRange) return; const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(savedRange); };
+      const applyFormat = (command, value = null) => { if (!page.isContentEditable) edit.click(); page.focus(); restoreSelection(); document.execCommand(command, false, value); };
+      edit.onclick = () => {
+        const on = !pages[0].isContentEditable;
+        pages.forEach(p => { p.contentEditable = String(on); p.spellcheck = false; });
+        edit.textContent = on ? '完成编辑' : '编辑';
+        edit.classList.toggle('secondary', on);
+        status.textContent = on ? '两页均可直接点击修改' : '';
+        if (on) page.focus();
+      };
+      fontSelect.onchange = () => applyFormat('fontName', fontSelect.value);
+      colorInput.oninput = () => applyFormat('foreColor', colorInput.value);
+      boldButton.onclick = () => applyFormat('bold');
+      document.getElementById('photoButton').onclick = () => input.click();
+      input.onchange = () => { const f = input.files && input.files[0]; if (!f || !f.type.startsWith('image/')) return; const r = new FileReader(); r.onload = () => { photoBox.innerHTML = `<img src="${r.result}" alt="照片">`; status.textContent = '照片已替换'; }; r.readAsDataURL(f); };
+      document.getElementById('exportButton').onclick = () => { status.textContent = '打印设置：A4 · 缩放100% · 开启背景图形 · 关闭页眉页脚 · 另存为 PDF'; window.print(); };
+    })();
+  </script>
+</body>
+</html>
