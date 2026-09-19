@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "model",
+      "cwd": "E:\\zzzz\\mini",
+      "command": "& 'C:\\Users\\ertstyuqk\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe' -X utf8 CraftAgents/skill/scripts/validate_agent_project_model.py 修改/CraftAgent/audit/agent-project-model.json --json",
+      "exit_code": 0,
+      "result": {
+        "ok": true,
+        "artifact_count": 9,
+        "errors": [],
+        "warnings": [
+          "artifacts[8]：ownership 未确认，不能生成个人 Owner 表述"
+        ]
+      }
+    },
+    {
+      "name": "ledger",
+      "cwd": "E:\\zzzz\\mini",
+      "command": "& 'C:\\Users\\ertstyuqk\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe' -X utf8 CraftAgents/skill/scripts/validate_claim_ledger.py 修改/CraftAgent/audit/claim-evidence-ledger.json --json",
+      "exit_code": 0,
+      "result": {
+        "ok": true,
+        "claim_count": 7,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "name": "package",
+      "cwd": "E:\\zzzz\\mini",
+      "command": "& 'C:\\Users\\ertstyuqk\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe' -X utf8 CraftAgents/skill/scripts/validate_resume_package.py 修改/CraftAgent/audit/agent-project-model.json 修改/CraftAgent/audit/claim-evidence-ledger.json --resume 修改/CraftAgent/Craft-简历片段.md --json",
+      "exit_code": 0,
+      "result": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "project_model: artifacts[8]：ownership 未确认，不能生成个人 Owner 表述"
+        ]
+      }
+    }
+  ]
+}

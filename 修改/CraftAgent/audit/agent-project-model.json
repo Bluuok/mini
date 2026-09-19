@@ -1,1 +1,305 @@
-{"schema_version": 1, "project": "craft-agents", "target_role": "AI 应用开发工程师（Agent / LLM 应用方向）", "scenario": "personal-technical-research", "artifacts": [{"id": "A01", "support_points": [], "agent_layer": "External Knowledge", "core_concept": "研究数据适配与来源记录", "problem": "实时取材需保留来源、抓取时间与正文，网页输入不可信。", "implementation": "web_search/web_fetch 保存查询、URL、fetchedAt、正文，读取前逐跳校验并绑定 DNS。", "artifact": "研究取材 JSON 产物与网页适配器", "artifact_evidence": ["packages/shared/src/research/tools.ts", "packages/shared/src/research/web.ts", "packages/shared/tests/research.test.ts"], "effect": "产物可定位到本次实际取材来源，不等于逐论点语义证据链。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "未提供 PDF 解析、向量检索、结论正确率或完美防注入保证。", "interview_artifact": ["研究取材 JSON 产物与网页适配器"], "agent_relevance": "agent_core", "evidence_keys": ["E01", "E02", "E04"]}, {"id": "A02", "support_points": ["R17", "R18"], "agent_layer": "Harness", "core_concept": "Tool Calling / 工具面装配", "problem": "模型需要获得工具定义，但不能任意执行宿主能力。", "implementation": "SessionManager 只向 Pi 研究路径装配工具定义，宿主按工具名分发到研究执行器或 MCP 池。", "artifact": "Pi 研究工具面与宿主执行接口", "artifact_evidence": ["packages/shared/src/research/tools.ts", "apps/electron/src/server/session-manager.ts", "packages/shared/tests/research.test.ts", "packages/pi-agent-server/src/index.ts"], "effect": "模型获得有限工具面，执行器持有真实调用与错误处理入口。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "研究工具自动装配只在 Pi 路径；工具参数校验不等于通用权限审批或完整安全沙箱。", "interview_artifact": ["Pi 研究工具面与宿主执行接口"], "agent_relevance": "agent_core", "evidence_keys": ["E01", "E03", "E04", "E15"]}, {"id": "A03", "support_points": [], "agent_layer": "Harness", "core_concept": "受限子 Agent 委派", "problem": "独立研究问题可并发，但扇出、超时和局部失败需要有界处理。", "implementation": "独立 PiAgent 实例与工作目录，共享并发槽、每轮预算、叶子工具白名单、取消传播、allSettled 清理与报告持久化。", "artifact": "delegate_research / ResearchSlots / ChildRecord", "artifact_evidence": ["packages/shared/src/research/tools.ts", "packages/shared/tests/research.test.ts"], "effect": "逐子任务保留结果、来源和终态，限制递归与扇出。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "不是通用 DAG 调度器；共享范围为单运行时；产物写失败会在等待全部子任务清理后使工具调用报错。 子代理工作目录独立；宿主研究产物与子报告存父会话。", "interview_artifact": ["delegate_research / ResearchSlots / ChildRecord"], "agent_relevance": "agent_core", "evidence_keys": ["E01", "E04"]}, {"id": "A04", "support_points": ["R08", "R09"], "agent_layer": "Harness", "core_concept": "Context Engineering", "problem": "恢复对话需要历史，但不能无限注入或混淆角色。", "implementation": "Claude 适配路径按 JS 字符预算逆向保留 user/assistant/tool 文本并恢复时序；历史以 JSON 引用数据与当前问题分开。", "artifact": "restoreTextHistory / promptWithHistory", "artifact_evidence": ["packages/shared/src/agent/backend/history.ts", "packages/shared/tests/review-regressions.test.ts", "packages/shared/src/agent/claude-agent.ts", "packages/pi-agent-server/src/index.ts"], "effect": "有界文本历史可供后续调用使用。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "已核到 Claude 调用路径；Pi 当前仅回填 user/assistant，未使用此预算桥接。不是 token 精确预算、摘要压缩、长期语义记忆或完整 SDK 原生 resume；可能截断单条文本。", "interview_artifact": ["restoreTextHistory / promptWithHistory"], "agent_relevance": "agent_core", "evidence_keys": ["E05", "E06", "E14", "E15"]}, {"id": "A05", "support_points": ["R03"], "agent_layer": "Harness", "core_concept": "多后端调用与生命周期契约", "problem": "各模型服务与 SDK 不应直接耦合到界面。", "implementation": "按 provider 配置建立 DeepSeek、Claude、Pi 后端，对外使用统一调用及生命周期接口。", "artifact": "AgentBackend / DRIVER_REGISTRY / createBackend", "artifact_evidence": ["packages/shared/src/agent/backend/factory.ts", "packages/shared/tests/factory.test.ts", "apps/electron/src/server/session-manager.ts"], "effect": "已有后端的选择在配置层收敛，保留能力差异。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "不是自动按任务阶段路由；工厂测试不证明三个后端真实 API 与工具能力都通过。", "interview_artifact": ["AgentBackend / DRIVER_REGISTRY / createBackend"], "agent_relevance": "agent_core", "evidence_keys": ["E07", "E08", "E03"]}, {"id": "A06", "support_points": ["R21"], "agent_layer": "Runtime", "core_concept": "Pi 子进程与宿主工具代理", "problem": "重依赖运行与宿主工具执行需要明确进程/协议接缝。", "implementation": "PiAgent 启动子进程，stdin/stdout JSONL 交换初始化、事件、工具请求和结果；受控传递环境配置。", "artifact": "PiAgent.ensureSubprocess / JSONL 协议", "artifact_evidence": ["packages/shared/src/agent/pi-agent.ts", "docs/IMPLEMENTATION-REVIEW.md", "packages/pi-agent-server/src/index.ts"], "effect": "SDK 执行与宿主应用形成显式进程与工具接口边界。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "子进程不是容器或 OS 沙箱；模型 API Key 会在 init 内进入子进程，不能声称所有凭据都留在宿主。", "interview_artifact": ["PiAgent.ensureSubprocess / JSONL 协议"], "agent_relevance": "agent_core", "evidence_keys": ["E09", "E12", "E15"]}, {"id": "A07", "support_points": ["R10", "R12"], "agent_layer": "Runtime", "core_concept": "任务提交与终态管理", "problem": "重复提交、忙碌和断线不能被混同为任务完成。", "implementation": "按 requestId 去重，持久化受理后返回 runId；消费流并保存结果后再发布完成，重启将残留 running 标为 interrupted。", "artifact": "SessionManager.submitMessage / recoverWorkspace", "artifact_evidence": ["apps/electron/src/server/session-manager.ts", "apps/electron/src/server/run-transcript.ts"], "effect": "区分受理、运行和终态；重启不把旧运行冒充成功。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "单进程本地状态；不保证外部工具的 exactly-once，也不自动重放付费调用。", "interview_artifact": ["SessionManager.submitMessage / recoverWorkspace"], "agent_relevance": "agent_core", "evidence_keys": ["E03", "E10"]}, {"id": "A08", "support_points": ["R09", "R10"], "agent_layer": "Memory", "core_concept": "会话文本检查点", "problem": "流式消息需要稳定身份，不能在完成或重连时简单重复追加。", "implementation": "RunTranscript 按稳定消息 ID 更新文本段，增量附带累计快照，关键事件或检查点间隔 flush 到会话记录。", "artifact": "RunTranscript / JSONL 会话快照", "artifact_evidence": ["apps/electron/src/server/run-transcript.ts", "apps/electron/src/server/session-manager.ts", "packages/shared/tests/session-event-message-parity.test.ts"], "effect": "保留已保存的文本、工具结果与错误，向消费端提供快照合并信息。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "不是每个 AgentEvent 都落盘；检查点间隙可能丢失尾部；累计快照存在传输开销。", "interview_artifact": ["RunTranscript / JSONL 会话快照"], "agent_relevance": "agent_core", "evidence_keys": ["E10", "E03", "E11"]}, {"id": "A09", "support_points": [], "agent_layer": "Eval", "core_concept": "确定性行为与契约回归", "problem": "预算、取消和事件映射需要可重复检查。", "implementation": "仓库定义研究故障注入、上下文预算和事件字段镜像契约测试。", "artifact": "research.test / review-regressions.test / parity test", "artifact_evidence": ["packages/shared/tests/research.test.ts", "packages/shared/tests/review-regressions.test.ts", "packages/shared/tests/session-event-message-parity.test.ts"], "effect": "可指认的回归用例存在；本次只检查源码和定义。", "ownership": "unknown", "artifact_status": "Implemented", "scenario": "personal-technical-research", "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys", "scope_boundary": "未提供研究质量 Gold/Bad/Ambiguous 数据集、LLM 裁判或任务成功率；镜像映射测试不代表真实端到端覆盖。", "interview_artifact": ["research.test / review-regressions.test / parity test"], "agent_relevance": "agent_supporting", "evidence_keys": ["E04", "E06", "E11"]}], "coverage": {"knowledge_tool": "covered", "harness": "covered", "runtime_or_memory": "covered", "eval": "weak", "workflow": "weak"}, "scenario_note": "自定义个人技术研究 route，来自原定稿，不冒认内置行业路由。", "source_ref": "Bluuok/ThreadCove@6a49d19a024fcbc6cdabeaf8da8ccbf1953dfbb9", "coverage_scope": "源码存在与结构覆盖，不等于本次运行通过或岗位熟练度评分。", "scope_note": "Implemented 表示固定源码中的实现；未知个人归属保留 unknown，不允许 resume_final。测试锚点仅为测试定义，本轮未运行业务测试。"}
+{
+  "schema_version": 1,
+  "project": "craft-agents",
+  "target_role": "AI 应用开发工程师（Agent / LLM 应用方向）",
+  "scenario": "personal-technical-research",
+  "artifacts": [
+    {
+      "id": "A01",
+      "support_points": [],
+      "agent_layer": "External Knowledge",
+      "core_concept": "研究数据适配与来源记录",
+      "problem": "实时取材需保留来源、抓取时间与正文，网页输入不可信。",
+      "implementation": "web_search/web_fetch 保存查询、URL、fetchedAt、正文，读取前逐跳校验并绑定 DNS。",
+      "artifact": "研究取材 JSON 产物与网页适配器",
+      "artifact_evidence": [
+        "packages/shared/src/research/tools.ts",
+        "packages/shared/src/research/web.ts",
+        "packages/shared/tests/research.test.ts"
+      ],
+      "effect": "产物可定位到本次实际取材来源，不等于逐论点语义证据链。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "未提供 PDF 解析、向量检索、结论正确率或完美防注入保证。",
+      "interview_artifact": [
+        "研究取材 JSON 产物与网页适配器"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E01",
+        "E02",
+        "E04"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A02",
+      "support_points": [
+        "R17",
+        "R18"
+      ],
+      "agent_layer": "Harness",
+      "core_concept": "Tool Calling / 工具面装配",
+      "problem": "模型需要获得工具定义，但不能任意执行宿主能力。",
+      "implementation": "SessionManager 只向 Pi 研究路径装配工具定义，宿主按工具名分发到研究执行器或 MCP 池。",
+      "artifact": "Pi 研究工具面与宿主执行接口",
+      "artifact_evidence": [
+        "packages/shared/src/research/tools.ts",
+        "apps/electron/src/server/session-manager.ts",
+        "packages/shared/tests/research.test.ts",
+        "packages/pi-agent-server/src/index.ts"
+      ],
+      "effect": "模型获得有限工具面，执行器持有真实调用与错误处理入口。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "研究工具自动装配只在 Pi 路径；工具参数校验不等于通用权限审批或完整安全沙箱。",
+      "interview_artifact": [
+        "Pi 研究工具面与宿主执行接口"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E01",
+        "E03",
+        "E04",
+        "E15"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A03",
+      "support_points": [],
+      "agent_layer": "Harness",
+      "core_concept": "受限子 Agent 委派",
+      "problem": "独立研究问题可并发，但扇出、超时和局部失败需要有界处理。",
+      "implementation": "独立 PiAgent 实例与工作目录，共享并发槽、每轮预算、叶子工具白名单、取消传播、allSettled 清理与报告持久化。",
+      "artifact": "delegate_research / ResearchSlots / ChildRecord",
+      "artifact_evidence": [
+        "packages/shared/src/research/tools.ts",
+        "packages/shared/tests/research.test.ts"
+      ],
+      "effect": "逐子任务保留结果、来源和终态，限制递归与扇出。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "共享并发槽属于单运行时；父运行累计子任务数和网页工具调用预算由父子复用，子任务模型轮数另限。网页调用计数不是实际HTTP次数或费用上限。子代理cwd独立，宿主取材和报告存父会话；allSettled等待子任务落定，不独立保证底层不会挂起。",
+      "interview_artifact": [
+        "delegate_research / ResearchSlots / ChildRecord"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E01",
+        "E04"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A04",
+      "support_points": [
+        "R08",
+        "R09"
+      ],
+      "agent_layer": "Harness",
+      "core_concept": "Context Engineering",
+      "problem": "恢复对话需要历史，但不能无限注入或混淆角色。",
+      "implementation": "Claude 适配路径按 JS 字符预算逆向保留 user/assistant/tool 文本并恢复时序；历史以 JSON 引用数据与当前问题分开。",
+      "artifact": "restoreTextHistory / promptWithHistory",
+      "artifact_evidence": [
+        "packages/shared/src/agent/backend/history.ts",
+        "packages/shared/tests/review-regressions.test.ts",
+        "packages/shared/src/agent/claude-agent.ts",
+        "packages/pi-agent-server/src/index.ts"
+      ],
+      "effect": "有界文本历史可供后续调用使用。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "已核到 Claude 调用路径；Pi 当前仅回填 user/assistant，未使用此预算桥接。不是 token 精确预算、摘要压缩、长期语义记忆或完整 SDK 原生 resume；可能截断单条文本。",
+      "interview_artifact": [
+        "restoreTextHistory / promptWithHistory"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E05",
+        "E06",
+        "E14",
+        "E15"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A05",
+      "support_points": [
+        "R03"
+      ],
+      "agent_layer": "Harness",
+      "core_concept": "多后端调用与生命周期契约",
+      "problem": "各模型服务与 SDK 不应直接耦合到界面。",
+      "implementation": "按 provider 配置建立 DeepSeek、Claude、Pi 后端，对外使用统一调用及生命周期接口。",
+      "artifact": "AgentBackend / DRIVER_REGISTRY / createBackend",
+      "artifact_evidence": [
+        "packages/shared/src/agent/backend/factory.ts",
+        "packages/shared/tests/factory.test.ts",
+        "apps/electron/src/server/session-manager.ts"
+      ],
+      "effect": "已有后端的选择在配置层收敛，保留能力差异。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "不是自动按任务阶段路由；工厂测试不证明三个后端真实 API 与工具能力都通过。",
+      "interview_artifact": [
+        "AgentBackend / DRIVER_REGISTRY / createBackend"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E07",
+        "E08",
+        "E03"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A06",
+      "support_points": [
+        "R21"
+      ],
+      "agent_layer": "Runtime",
+      "core_concept": "Pi 子进程与宿主工具代理",
+      "problem": "重依赖运行与宿主工具执行需要明确进程/协议接缝。",
+      "implementation": "PiAgent 启动子进程，stdin/stdout JSONL 交换初始化、事件、工具请求和结果；受控传递环境配置。",
+      "artifact": "PiAgent.ensureSubprocess / JSONL 协议",
+      "artifact_evidence": [
+        "packages/shared/src/agent/pi-agent.ts",
+        "docs/IMPLEMENTATION-REVIEW.md",
+        "packages/pi-agent-server/src/index.ts"
+      ],
+      "effect": "SDK 执行与宿主应用形成显式进程与工具接口边界。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "子进程不是容器或 OS 沙箱；模型 API Key 会在 init 内进入子进程，不能声称所有凭据都留在宿主。",
+      "interview_artifact": [
+        "PiAgent.ensureSubprocess / JSONL 协议"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E09",
+        "E12",
+        "E15"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A07",
+      "support_points": [
+        "R10",
+        "R12"
+      ],
+      "agent_layer": "Runtime",
+      "core_concept": "任务提交与终态管理",
+      "problem": "重复提交、忙碌和断线不能被混同为任务完成。",
+      "implementation": "按 requestId 去重，持久化受理后返回 runId；消费流并保存结果后再发布完成，重启将残留 running 标为 interrupted。",
+      "artifact": "SessionManager.submitMessage / recoverWorkspace",
+      "artifact_evidence": [
+        "apps/electron/src/server/session-manager.ts",
+        "apps/electron/src/server/run-transcript.ts"
+      ],
+      "effect": "区分受理、运行和终态；重启不把旧运行冒充成功。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "单进程本地状态；不保证外部工具的 exactly-once，也不自动重放付费调用。",
+      "interview_artifact": [
+        "SessionManager.submitMessage / recoverWorkspace"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E03",
+        "E10"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A08",
+      "support_points": [
+        "R09",
+        "R10"
+      ],
+      "agent_layer": "Memory",
+      "core_concept": "会话文本检查点",
+      "problem": "流式消息需要稳定身份，不能在完成或重连时简单重复追加。",
+      "implementation": "RunTranscript 按稳定消息 ID 更新文本段，增量附带累计快照，关键事件或检查点间隔 flush 到会话记录。",
+      "artifact": "RunTranscript / JSONL 会话快照",
+      "artifact_evidence": [
+        "apps/electron/src/server/run-transcript.ts",
+        "apps/electron/src/server/session-manager.ts",
+        "packages/shared/tests/session-event-message-parity.test.ts"
+      ],
+      "effect": "保留已保存的文本、工具结果与错误，向消费端提供快照合并信息。",
+      "ownership": "participated",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "不是每个 AgentEvent 都落盘；检查点间隙可能丢失尾部；累计快照存在传输开销。",
+      "interview_artifact": [
+        "RunTranscript / JSONL 会话快照"
+      ],
+      "agent_relevance": "agent_core",
+      "evidence_keys": [
+        "E10",
+        "E03",
+        "E11"
+      ],
+      "ownership_basis": "user_attested_reproduction: 2026-09-19 用户确认五点复现实现；不表示全部上游或SDK原创。"
+    },
+    {
+      "id": "A09",
+      "support_points": [],
+      "agent_layer": "Eval",
+      "core_concept": "确定性行为与契约回归",
+      "problem": "预算、取消和事件映射需要可重复检查。",
+      "implementation": "仓库定义研究故障注入、上下文预算和事件字段镜像契约测试。",
+      "artifact": "research.test / review-regressions.test / parity test",
+      "artifact_evidence": [
+        "packages/shared/tests/research.test.ts",
+        "packages/shared/tests/review-regressions.test.ts",
+        "packages/shared/tests/session-event-message-parity.test.ts"
+      ],
+      "effect": "可指认的回归用例存在；本次只检查源码和定义。",
+      "ownership": "unknown",
+      "artifact_status": "Implemented",
+      "scenario": "personal-technical-research",
+      "project_source": "见根字段 source_ref；细节定位见 sources.json 与 evidence_keys",
+      "scope_boundary": "未提供研究质量 Gold/Bad/Ambiguous 数据集、LLM 裁判或任务成功率；镜像映射测试不代表真实端到端覆盖。",
+      "interview_artifact": [
+        "research.test / review-regressions.test / parity test"
+      ],
+      "agent_relevance": "agent_supporting",
+      "evidence_keys": [
+        "E04",
+        "E06",
+        "E11"
+      ]
+    }
+  ],
+  "coverage": {
+    "knowledge_tool": "covered",
+    "harness": "covered",
+    "runtime_or_memory": "covered",
+    "eval": "weak",
+    "workflow": "weak"
+  },
+  "scenario_note": "自定义个人技术研究 route，来自原定稿，不冒认内置行业路由。",
+  "source_ref": "Bluuok/ThreadCove@6a49d19a024fcbc6cdabeaf8da8ccbf1953dfbb9",
+  "coverage_scope": "源码存在与结构覆盖，不等于本次运行通过或岗位熟练度评分。",
+  "scope_note": "2026-09-19 用户确认五个选点的复现实现；引用的A01-A08记participated，不认领全部SDK原创。A09测试/Eval辅助产物不因该声明自动确认归属或执行结果。",
+  "ownership_attestation": "修改/复审-2026-09-19/用户确认与使用边界.md"
+}

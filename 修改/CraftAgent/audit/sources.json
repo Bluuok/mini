@@ -1,1 +1,99 @@
-{"repository": "Bluuok/ThreadCove", "ref": "6a49d19a024fcbc6cdabeaf8da8ccbf1953dfbb9", "sources": {"E01": {"path": "packages/shared/src/research/tools.ts", "symbol": "WEB_TOOLS / ResearchTools.bind / execute / runChild / ResearchSlots / recoverSession", "role": "implementation", "note": "检索工具、子代理调度、来源产物、取消与预算"}, "E02": {"path": "packages/shared/src/research/web.ts", "symbol": "validatePublicUrl / fetchPublicPage / extractPage / searchWeb", "role": "implementation", "note": "地址校验、DNS 绑定、重定向复检、取材解析与截断"}, "E03": {"path": "apps/electron/src/server/session-manager.ts", "symbol": "createSession / submitMessage / recoverWorkspace", "role": "implementation", "note": "Pi 专属研究工具装配、受理/完成、重启中断"}, "E04": {"path": "packages/shared/tests/research.test.ts", "symbol": "并发槽 / 父取消 / 子失败 / 中断恢复 / 产物写失败 / 子任务超时测试", "role": "test", "note": "已读测试定义；本次没有运行 Bun 测试或真实搜索"}, "E05": {"path": "packages/shared/src/agent/backend/history.ts", "symbol": "restoreTextHistory / promptWithHistory", "role": "implementation", "note": "字符预算、角色过滤、引用式历史"}, "E06": {"path": "packages/shared/tests/review-regressions.test.ts", "symbol": "bounded text history / safe session deletion", "role": "test", "note": "已读测试定义；预算与角色断言，不是本次执行结果"}, "E07": {"path": "packages/shared/src/agent/backend/factory.ts", "symbol": "DRIVER_REGISTRY / BACKEND_FACTORIES / createBackend", "role": "implementation", "note": "三个后端配置映射；不证明功能完全对等"}, "E08": {"path": "packages/shared/tests/factory.test.ts", "symbol": "backend factory", "role": "test", "note": "Claude/Pi 路由与生命周期表面；没有覆盖全部后端真实 API"}, "E09": {"path": "packages/shared/src/agent/pi-agent.ts", "symbol": "PiAgent / ensureSubprocess / InboundMessage / OutboundMessage", "role": "implementation", "note": "子进程启动、JSONL 协议、宿主工具接口；init 含模型 apiKey"}, "E10": {"path": "apps/electron/src/server/run-transcript.ts", "symbol": "RunTranscript.consume / flush", "role": "implementation", "note": "消息 ID、文本快照、检查点、结果与错误保存"}, "E11": {"path": "packages/shared/tests/session-event-message-parity.test.ts", "symbol": "eventToStoredFields / eventToRenderFields", "role": "contract", "note": "测试内镜像映射，不直接导入真实应用路径，不能单独证明端到端一致"}, "E12": {"path": "docs/IMPLEMENTATION-REVIEW.md", "symbol": "2026-09-14 提交前复验 / OpenCode Go-Pi SDK 接入 / 数据兼容与边界", "role": "documentation", "note": "仓库历史验收记录；本次未取得忽略目录内截图/原始报告，未复测"}, "E14": {"path": "packages/shared/src/agent/claude-agent.ts", "symbol": "ClaudeAgent.restoreHistory / chatImpl", "role": "implementation", "note": "实际调用 restoreTextHistory 与 promptWithHistory，确认字符预算桥接的后端入口"}, "E15": {"path": "packages/pi-agent-server/src/index.ts", "symbol": "initialize / executeToolViaHost / main", "role": "implementation", "note": "禁用默认工具和自动资源加载；显式注册工具；Pi 历史回填只保留 user/assistant，没有相同的字符预算和 tool 文本桥接"}, "E13": {"path": "README.md", "symbol": "核心能力 / 一条消息的完整旅程", "role": "documentation", "note": "产品定位与架构说明，部分计数和研究范围滞后于源码"}}, "mini_ref": "9bcbc97bdecef9200aa9626b697bd72657ec7822"}
+{
+  "repository": "Bluuok/ThreadCove",
+  "ref": "6a49d19a024fcbc6cdabeaf8da8ccbf1953dfbb9",
+  "sources": {
+    "E01": {
+      "path": "packages/shared/src/research/tools.ts",
+      "symbol": "WEB_TOOLS / ResearchTools.bind / execute / runChild / ResearchSlots / recoverSession",
+      "role": "implementation",
+      "note": "检索工具、子代理调度、来源产物、取消与预算"
+    },
+    "E02": {
+      "path": "packages/shared/src/research/web.ts",
+      "symbol": "validatePublicUrl / fetchPublicPage / extractPage / searchWeb",
+      "role": "implementation",
+      "note": "地址校验、DNS 绑定、重定向复检、取材解析与截断"
+    },
+    "E03": {
+      "path": "apps/electron/src/server/session-manager.ts",
+      "symbol": "createSession / submitMessage / recoverWorkspace",
+      "role": "implementation",
+      "note": "Pi 专属研究工具装配、受理/完成、重启中断"
+    },
+    "E04": {
+      "path": "packages/shared/tests/research.test.ts",
+      "symbol": "并发槽 / 父取消 / 子失败 / 中断恢复 / 产物写失败 / 子任务超时测试",
+      "role": "test",
+      "note": "已读测试定义；本次没有运行 Bun 测试或真实搜索"
+    },
+    "E05": {
+      "path": "packages/shared/src/agent/backend/history.ts",
+      "symbol": "restoreTextHistory / promptWithHistory",
+      "role": "implementation",
+      "note": "字符预算、角色过滤、引用式历史"
+    },
+    "E06": {
+      "path": "packages/shared/tests/review-regressions.test.ts",
+      "symbol": "bounded text history / safe session deletion",
+      "role": "test",
+      "note": "已读测试定义；预算与角色断言，不是本次执行结果"
+    },
+    "E07": {
+      "path": "packages/shared/src/agent/backend/factory.ts",
+      "symbol": "DRIVER_REGISTRY / BACKEND_FACTORIES / createBackend",
+      "role": "implementation",
+      "note": "三个后端配置映射；不证明功能完全对等"
+    },
+    "E08": {
+      "path": "packages/shared/tests/factory.test.ts",
+      "symbol": "backend factory",
+      "role": "test",
+      "note": "Claude/Pi 路由与生命周期表面；没有覆盖全部后端真实 API"
+    },
+    "E09": {
+      "path": "packages/shared/src/agent/pi-agent.ts",
+      "symbol": "PiAgent / ensureSubprocess / InboundMessage / OutboundMessage",
+      "role": "implementation",
+      "note": "子进程启动、JSONL 协议、宿主工具接口；init 含模型 apiKey"
+    },
+    "E10": {
+      "path": "apps/electron/src/server/run-transcript.ts",
+      "symbol": "RunTranscript.consume / flush",
+      "role": "implementation",
+      "note": "消息 ID、文本快照、检查点、结果与错误保存"
+    },
+    "E11": {
+      "path": "packages/shared/tests/session-event-message-parity.test.ts",
+      "symbol": "eventToStoredFields / eventToRenderFields",
+      "role": "contract",
+      "note": "测试内镜像映射，不直接导入真实应用路径，不能单独证明端到端一致"
+    },
+    "E12": {
+      "path": "docs/IMPLEMENTATION-REVIEW.md",
+      "symbol": "2026-09-14 提交前复验 / OpenCode Go-Pi SDK 接入 / 数据兼容与边界",
+      "role": "documentation",
+      "note": "仓库历史验收记录；本次未取得忽略目录内截图/原始报告，未复测"
+    },
+    "E14": {
+      "path": "packages/shared/src/agent/claude-agent.ts",
+      "symbol": "ClaudeAgent.restoreHistory / chatImpl",
+      "role": "implementation",
+      "note": "实际调用 restoreTextHistory 与 promptWithHistory，确认字符预算桥接的后端入口"
+    },
+    "E15": {
+      "path": "packages/pi-agent-server/src/index.ts",
+      "symbol": "initialize / executeToolViaHost / main",
+      "role": "implementation",
+      "note": "禁用默认工具和自动资源加载；显式注册工具；Pi 历史回填只保留 user/assistant，没有相同的字符预算和 tool 文本桥接"
+    },
+    "E13": {
+      "path": "README.md",
+      "symbol": "核心能力 / 一条消息的完整旅程",
+      "role": "documentation",
+      "note": "产品定位与架构说明，部分计数和研究范围滞后于源码"
+    }
+  },
+  "mini_ref": "7fa4b34a08ba42867a4c39d2a705aee503654e92",
+  "initial_material_ref": "9bcbc97bdecef9200aa9626b697bd72657ec7822",
+  "material_ref_note": "本次审查输入提交；initial_material_ref保留最初生成材料基线，源码ref未变化。"
+}

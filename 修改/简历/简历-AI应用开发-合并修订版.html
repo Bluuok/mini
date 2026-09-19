@@ -90,9 +90,9 @@
       <h2 class="section-title">项目经历（一）</h2>
       <div class="role-row"><span>个人项目</span><span>ThreadCove · 个人研究 Agent 工作台</span><span><span class="pending">【待补充时间】</span></span></div>
       <div class="body">
-        <p class="project-summary">基于 Craft Agents 参考架构的个人研究工作台，面向技术选型、公开资料阅读与方案比较，使用 TypeScript 将检索取材、受限任务委派和执行记录整合到 Electron/Web 界面。</p>
+        <p class="project-summary">基于 Craft Agents 参考架构复现并实现的个人研究工作台，面向技术选型、公开资料阅读与方案比较，使用 TypeScript 将检索取材、受限任务委派和执行记录整合到 Electron/Web 界面。</p>
         <div class="bullet"><span class="marker">•</span><div><strong>研究工具接入与证据留存</strong> 面向技术调研中实时取材与来源回看的需求，为 Pi 后端接入 web_search、web_fetch 与 MCP 代理工具；将检索结果、来源 URL 和抓取时间保存为会话产物，并对网页读取实施地址校验、重定向复检及响应上限，使取材过程可检查、来源可回看。</div></div>
-        <div class="bullet"><span class="marker">•</span><div><strong>受限子 Agent 编排</strong> 面向可独立调查的子问题，实现 delegate_research，以共享并发槽、单轮任务与网络预算、叶子工具白名单约束 Pi 子代理；传播父任务取消和子任务超时，等待子任务清理并分别记录状态与来源，在常规子任务失败时保留成功分支结果。</div></div>
+        <div class="bullet"><span class="marker">•</span><div><strong>受限子 Agent 编排</strong> 面向可独立调查的子问题，实现 delegate_research，以共享并发槽、父运行累计子任务数与网页工具调用预算、子任务模型轮数限制和叶子工具白名单约束 Pi 子代理；传播父任务取消和子任务超时，等待子任务清理并分别记录状态与来源，在常规子任务失败时保留成功分支结果。</div></div>
         <div class="bullet"><span class="marker">•</span><div><strong>Context Engineering</strong> 针对 Claude 后端历史无界注入的问题，按字符预算提取近期 user/assistant/tool 文本、保留角色与时序，并以引用数据拼接当前问题，实现可供后续提问使用的有界历史桥接。</div></div>
         <div class="bullet"><span class="marker">•</span><div><strong>多后端适配与进程边界</strong> 面向模型接口和运行方式差异，以 AgentBackend.chat() 统一 DeepSeek、Claude 与 Pi 的调用及生命周期接口；将 Pi SDK 置于 JSONL 子进程，工具请求代理回宿主执行，使已有后端按配置切换，同时保留各后端的能力边界。</div></div>
         <div class="bullet"><span class="marker">•</span><div><strong>任务生命周期与流式恢复</strong> 针对重复提交、取消及断线后的状态歧义，通过 requestId/runId 区分受理与完成，统一消费 AgentEvent；以稳定消息 ID、累计文本快照和 JSONL 检查点保存文本及执行结果，向桌面/Web 提供一致事件入口，并在重启时将未完成任务标记为中断。</div></div>
@@ -103,7 +103,7 @@
       <h2 class="section-title">项目经历（二）</h2>
       <div class="role-row"><span>个人项目</span><span>Clawtide · 自托管数字员工工作站</span><span><span class="pending">【待补充时间】</span></span></div>
       <div class="body">
-        <p class="project-summary">基于 HappyClaw 参考架构的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。</p>
+        <p class="project-summary">基于 HappyClaw 参考架构复现并实现的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。</p>
         <p class="project-summary"><span class="label">技术栈：</span>TypeScript、Node.js、Hono、SQLite、React、WebSocket、Claude Agent SDK</p>
         <div class="bullet"><span class="marker">•</span><div><strong>任务物化与条件认领</strong> 针对定时任务重复触发与执行记录难以追踪的问题，基于 SQLite 唯一键和条件更新，设计了 occurrence 物化、owner/token 认领及终态记录链路，实现了发生点去重与任务状态更新的条件校验。</div></div>
         <div class="bullet"><span class="marker">•</span><div><strong>Agent Profile 与配置变更</strong> 针对数字员工规则散落、局部修改易覆盖其他配置的问题，基于四段式 Prompt 与版本快照，设计了独立字段更新、历史内容恢复和草稿短语确认入口，实现了配置分段维护与历史可回看。</div></div>

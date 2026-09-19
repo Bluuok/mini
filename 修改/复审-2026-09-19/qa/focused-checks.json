@@ -1,0 +1,119 @@
+{
+  "ok": true,
+  "execution_route": "primary_local_shell",
+  "negative_checks": [
+    {
+      "name": "invalid_current_mapping_status",
+      "expected_failed_check": "mapping_status_current",
+      "failed_checks": [
+        "mapping_status_current"
+      ],
+      "rejected": true,
+      "ok": true
+    },
+    {
+      "name": "empty_mapping_references",
+      "expected_failed_check": "claim-craft-001:refs",
+      "failed_checks": [
+        "claim-craft-001:refs"
+      ],
+      "rejected": true,
+      "ok": true
+    },
+    {
+      "name": "selected_A01_ownership_unknown",
+      "expected_failed_check": "craft_gate",
+      "failed_checks": [
+        "craft_gate"
+      ],
+      "rejected": true,
+      "ok": true
+    },
+    {
+      "name": "historical_agent_execution_rewritten",
+      "expected_failed_check": "history_2026-09-18_flags_preserved",
+      "failed_checks": [
+        "history_2026-09-18_flags_preserved"
+      ],
+      "rejected": true,
+      "ok": true
+    }
+  ],
+  "html_scope_checks": [
+    {
+      "path": "简历-AI应用开发.html",
+      "original_replacement_counts": [
+        1,
+        1,
+        1
+      ],
+      "only_three_authorized_text_replacements": true
+    },
+    {
+      "path": "修改/简历/简历-AI应用开发-合并修订版.html",
+      "original_replacement_counts": [
+        1,
+        1,
+        1
+      ],
+      "only_three_authorized_text_replacements": true
+    }
+  ],
+  "historical_files_unchanged": true,
+  "final_scope_check": {
+    "ok": true,
+    "out_of_scope_paths": [],
+    "tracked_changed_count": 21,
+    "new_files": [
+      "修改/复审-2026-09-19/README.md",
+      "修改/复审-2026-09-19/claim-map.json",
+      "修改/复审-2026-09-19/material-baseline.json",
+      "修改/复审-2026-09-19/verification.json",
+      "修改/复审-2026-09-19/独立对抗评审.md",
+      "修改/复审-2026-09-19/用户确认与使用边界.md"
+    ],
+    "nine_stage_table_rows": 9,
+    "expanded_stage_sections": 9,
+    "scope": "recheck only the generated-cache cleanup and count within the nine-stage section"
+  },
+  "structure_counts": {
+    "Craft": {
+      "resume_bullets": 5,
+      "story_tiers": {
+        "30s": 5,
+        "90s": 5,
+        "3m": 5
+      },
+      "main_modules": 8,
+      "indexed_qa_questions": 15
+    },
+    "HappyClaw": {
+      "resume_bullets": 5,
+      "story_tiers": {
+        "30s": 5,
+        "90s": 5,
+        "3m": 5
+      },
+      "main_modules": 8,
+      "indexed_qa_questions": 15,
+      "unexecuted_fixtures": 12,
+      "nine_stage_rows": 9,
+      "expanded_stage_sections": 9
+    }
+  },
+  "initial_scope_failure": {
+    "exit_code": 1,
+    "reason": "The Craft package validator created two untracked Python bytecode files. Only those two generated files were removed; scope check then passed.",
+    "paths": [
+      "CraftAgents/skill/scripts/__pycache__/validate_agent_project_model.cpython-312.pyc",
+      "CraftAgents/skill/scripts/__pycache__/validate_claim_ledger.cpython-312.pyc"
+    ]
+  },
+  "count_correction": "Initial nine-stage row count covered all tables (17); the dedicated section contains 9 table rows and 9 expanded sections.",
+  "business_tests_executed": false,
+  "browser_pdf_rendered": false,
+  "reproduction": {
+    "focused_powershell_command": "$validationCode = @'\nimport copy, importlib.util, json, re, subprocess, sys\nfrom pathlib import Path\nfrom unittest.mock import patch\nsys.dont_write_bytecode = True\nroot = Path.cwd()\nspec = importlib.util.spec_from_file_location(\"resume_review\", root / \"scripts/check_resume_review.py\")\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\noriginal_read = Path.read_text\nmapping_path = \"修改/复审-2026-09-19/claim-map.json\"\ndef read_json(path):\n    return json.loads(original_read(root / path, encoding=\"utf-8-sig\"))\ndef run_mutation(name, path, change, expected):\n    document = copy.deepcopy(read_json(path))\n    change(document)\n    override = json.dumps(document, ensure_ascii=False)\n    target = (root / path).resolve()\n    def patched_read(self, *args, **kwargs):\n        return override if self.resolve() == target else original_read(self, *args, **kwargs)\n    with patch.object(Path, \"read_text\", patched_read):\n        result = module.validate(root)\n    failed = [c[\"name\"] for c in result[\"checks\"] if not c[\"ok\"]]\n    return {\"name\": name, \"expected_failed_check\": expected, \"failed_checks\": failed, \"rejected\": not result[\"ok\"], \"ok\": not result[\"ok\"] and expected in failed}\nfirst_claim = read_json(mapping_path)[\"claims\"][0]\nrefs_key = \"artifact_refs\" if first_claim[\"project\"] == \"ThreadCove\" else \"evidence_refs\"\nnegative = [\n    run_mutation(\"invalid_current_mapping_status\", mapping_path, lambda d: d[\"claims\"][0].update(status=\"invalid\"), \"mapping_status_current\"),\n    run_mutation(\"empty_mapping_references\", mapping_path, lambda d: d[\"claims\"][0].update({refs_key: []}), first_claim[\"claim\"] + \":refs\"),\n    run_mutation(\"selected_A01_ownership_unknown\", \"修改/CraftAgent/audit/agent-project-model.json\", lambda d: next(a for a in d[\"artifacts\"] if a[\"id\"] == \"A01\").update(ownership=\"unknown\"), \"craft_gate\"),\n    run_mutation(\"historical_agent_execution_rewritten\", \"修改/复审-2026-09-18/claim-map.json\", lambda d: d.update(independent_agents_executed=True), \"history_2026-09-18_flags_preserved\"),\n]\ndef git(*args):\n    completed = subprocess.run([\"git\", \"-c\", \"core.quotepath=false\", *args], cwd=root, capture_output=True, check=True)\n    return completed.stdout.decode(\"utf-8\")\nbase = \"7fa4b34a08ba42867a4c39d2a705aee503654e92\"\nreplacements = [\n    (\"基于 Craft Agents 参考架构的个人研究工作台\", \"基于 Craft Agents 参考架构复现并实现的个人研究工作台\"),\n    (\"基于 HappyClaw 参考架构的个人项目\", \"基于 HappyClaw 参考架构复现并实现的个人项目\"),\n    (\"以共享并发槽、单轮任务与网络预算、叶子工具白名单约束 Pi 子代理\", \"以共享并发槽、父运行累计子任务数与网页工具调用预算、子任务模型轮数限制和叶子工具白名单约束 Pi 子代理\"),\n]\nhtml_checks = []\nfor path in [\"简历-AI应用开发.html\", \"修改/简历/简历-AI应用开发-合并修订版.html\"]:\n    expected = git(\"show\", base + \":\" + path).replace(\"\\r\\n\", \"\\n\")\n    occurrences = [expected.count(before) for before, after in replacements]\n    for before, after in replacements:\n        expected = expected.replace(before, after)\n    current = (root / path).read_bytes().decode(\"utf-8\").replace(\"\\r\\n\", \"\\n\")\n    html_checks.append({\"path\": path, \"original_replacement_counts\": occurrences, \"only_three_authorized_text_replacements\": all(n == 1 for n in occurrences) and expected == current})\nchanged = git(\"diff\", \"--name-only\", base).splitlines()\nuntracked = git(\"ls-files\", \"--others\", \"--exclude-standard\").splitlines()\nallowed_files = {\n    \"Craft-定稿.md\", \"Craft-故事.md\", \"HappyClaw-定稿.md\", \"HappyClaw-故事.md\", \"README.md\",\n    \"scripts/check_resume_review.py\", \"修改/README.md\", \"简历-AI应用开发.html\",\n    \"修改/简历/简历-AI应用开发-合并修订版.html\",\n    \"修改/CraftAgent/Craft-故事.md\", \"修改/CraftAgent/Craft-简历片段.md\", \"修改/CraftAgent/Craft-面试QA.md\",\n    \"修改/CraftAgent/audit/agent-project-model.json\", \"修改/CraftAgent/audit/claim-evidence-ledger.json\", \"修改/CraftAgent/audit/sources.json\",\n    \"修改/HappyClaw/HappyClaw-定稿.md\", \"修改/HappyClaw/HappyClaw-故事.md\", \"修改/HappyClaw/HappyClaw-简历片段.md\", \"修改/HappyClaw/HappyClaw-面试QA.md\",\n    \"修改/HappyClaw/claims.json\", \"修改/HappyClaw/resume-data.json\",\n}\nout_of_scope = [p for p in changed + untracked if p not in allowed_files and not p.startswith(\"修改/复审-2026-09-19/\")]\nhistory_modified = [p for p in changed if p.startswith(\"修改/复审-2026-09-18/\") or \"归档\" in p]\ncoverage = {}\nfor name, folder in [(\"Craft\", \"CraftAgent\"), (\"HappyClaw\", \"HappyClaw\")]:\n    full = original_read(root / \"修改\" / folder / (name + \"-故事.md\"), encoding=\"utf-8-sig\")\n    short = original_read(root / (name + \"-故事.md\"), encoding=\"utf-8-sig\")\n    snippet = original_read(root / \"修改\" / folder / (name + \"-简历片段.md\"), encoding=\"utf-8-sig\")\n    coverage[name] = {\n        \"resume_bullets\": len(re.findall(r\"^- \\*\\*\", snippet, re.M)),\n        \"story_tiers\": {k: len(re.findall(pattern, full)) for k, pattern in [(\"30s\", r\"30\\s*秒\\s*摘要\"), (\"90s\", r\"90\\s*秒\\s*讲法\"), (\"3m\", r\"3\\s*分钟\\s*讲法\")]},\n        \"main_modules\": len(re.findall(r\"^## M[1-8] \", short, re.M)),\n        \"indexed_qa_questions\": sum(len(q[\"questions\"]) for q in read_json(\"修改/CraftAgent/audit/qa-map.json\")) if name == \"Craft\" else len(read_json(\"修改/HappyClaw/qa.json\")[\"questions\"]),\n    }\nrecords = read_json(\"修改/HappyClaw/fixtures/待执行记录.json\")\ncoverage[\"HappyClaw\"][\"unexecuted_fixtures\"] = sum(r[\"status\"] == \"not_run\" and r[\"observed\"] is None for r in records)\ncoverage[\"HappyClaw\"][\"nine_stage_rows\"] = len(re.findall(r\"^\\| [0-8] \", original_read(root / \"修改/HappyClaw/HappyClaw-故事.md\", encoding=\"utf-8-sig\"), re.M))\nresult = {\n    \"ok\": all(n[\"ok\"] for n in negative) and all(h[\"only_three_authorized_text_replacements\"] for h in html_checks) and not out_of_scope and not history_modified,\n    \"negative_checks\": negative, \"html_scope_checks\": html_checks,\n    \"changed_tracked_count\": len(changed), \"new_files\": untracked,\n    \"out_of_scope_paths\": out_of_scope, \"modified_history_paths\": history_modified,\n    \"structure_counts\": coverage, \"files_written\": [], \"business_tests_executed\": False, \"browser_pdf_rendered\": False\n}\nprint(json.dumps(result, ensure_ascii=False, indent=2))\nraise SystemExit(0 if result[\"ok\"] else 1)\n'@\n$validationCode | & 'C:\\Users\\ertstyuqk\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe' -X utf8 -",
+    "scope_recheck_powershell_command": "$scopeCode = @'\nimport json, re, subprocess\nfrom pathlib import Path\nroot = Path.cwd()\ndef git(*args):\n    return subprocess.run([\"git\", \"-c\", \"core.quotepath=false\", *args], capture_output=True, check=True).stdout.decode(\"utf-8\").splitlines()\ntracked = git(\"diff\", \"--name-only\", \"7fa4b34a08ba42867a4c39d2a705aee503654e92\")\nuntracked = git(\"ls-files\", \"--others\", \"--exclude-standard\")\nallowed = {\n\"Craft-定稿.md\",\"Craft-故事.md\",\"HappyClaw-定稿.md\",\"HappyClaw-故事.md\",\"README.md\",\"scripts/check_resume_review.py\",\n\"修改/README.md\",\"简历-AI应用开发.html\",\"修改/简历/简历-AI应用开发-合并修订版.html\",\n\"修改/CraftAgent/Craft-故事.md\",\"修改/CraftAgent/Craft-简历片段.md\",\"修改/CraftAgent/Craft-面试QA.md\",\n\"修改/CraftAgent/audit/agent-project-model.json\",\"修改/CraftAgent/audit/claim-evidence-ledger.json\",\"修改/CraftAgent/audit/sources.json\",\n\"修改/HappyClaw/HappyClaw-定稿.md\",\"修改/HappyClaw/HappyClaw-故事.md\",\"修改/HappyClaw/HappyClaw-简历片段.md\",\n\"修改/HappyClaw/HappyClaw-面试QA.md\",\"修改/HappyClaw/claims.json\",\"修改/HappyClaw/resume-data.json\"\n}\nunexpected = [p for p in tracked+untracked if p not in allowed and not p.startswith(\"修改/复审-2026-09-19/\")]\nstory = (root/\"修改/HappyClaw/HappyClaw-故事.md\").read_text(encoding=\"utf-8-sig\")\nsection = story.split(\"## 九阶段主线\", 1)[1]\nsection = re.split(r\"\\n## \", section, maxsplit=1)[0]\ntable_rows = re.findall(r\"^\\| ([0-8]) \", section, re.M)\nexpanded_stages = re.findall(r\"^### 阶段([0-8]) \", section, re.M)\nresult = {\"ok\": not unexpected and set(table_rows)==set(\"012345678\") and set(expanded_stages)==set(\"012345678\"),\"out_of_scope_paths\":unexpected,\"tracked_changed_count\":len(tracked),\"new_files\":untracked,\"nine_stage_table_rows\":len(table_rows),\"expanded_stage_sections\":len(expanded_stages),\"scope\":\"recheck only the generated-cache cleanup and count within the nine-stage section\"}\nprint(json.dumps(result,ensure_ascii=False,indent=2))\nraise SystemExit(0 if result[\"ok\"] else 1)\n'@\n$scopeCode | & 'C:\\Users\\ertstyuqk\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe' -B -X utf8 -"
+  }
+}

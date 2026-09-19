@@ -1,0 +1,150 @@
+{
+  "material_base": "7fa4b34a08ba42867a4c39d2a705aee503654e92",
+  "source_commits": {
+    "ThreadCove": "6a49d19a024fcbc6cdabeaf8da8ccbf1953dfbb9",
+    "Clawtide": "dde300313de851baa953f24f6a0f8c75e9cacd3f"
+  },
+  "independent_agents_executed": true,
+  "business_tests_executed": false,
+  "claims": [
+    {
+      "project": "ThreadCove",
+      "bullet": 1,
+      "title": "研究工具接入与证据留存",
+      "claim": "claim-craft-001",
+      "story": "Craft-故事.md::M4.1",
+      "qa": "修改/CraftAgent/Craft-面试QA.md::Q01",
+      "artifact_refs": [
+        "A01",
+        "A02"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "ThreadCove",
+      "bullet": 2,
+      "title": "受限子 Agent 编排",
+      "claim": "claim-craft-002",
+      "story": "Craft-故事.md::M4.2",
+      "qa": "修改/CraftAgent/Craft-面试QA.md::Q02",
+      "artifact_refs": [
+        "A03"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "ThreadCove",
+      "bullet": 3,
+      "title": "Context Engineering",
+      "claim": "claim-craft-003",
+      "story": "Craft-故事.md::M4.3",
+      "qa": "修改/CraftAgent/Craft-面试QA.md::Q03",
+      "artifact_refs": [
+        "A04"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "ThreadCove",
+      "bullet": 4,
+      "title": "多后端适配与进程边界",
+      "claim": "claim-craft-004",
+      "story": "Craft-故事.md::M4.4",
+      "qa": "修改/CraftAgent/Craft-面试QA.md::Q04",
+      "artifact_refs": [
+        "A05",
+        "A06"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "ThreadCove",
+      "bullet": 5,
+      "title": "任务生命周期与流式恢复",
+      "claim": "claim-craft-005",
+      "story": "Craft-故事.md::M4.5",
+      "qa": "修改/CraftAgent/Craft-面试QA.md::Q05",
+      "artifact_refs": [
+        "A07",
+        "A08"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "Clawtide",
+      "bullet": 1,
+      "title": "任务物化与条件认领",
+      "claim": "claim-happy-01",
+      "story": "HappyClaw-故事.md::R14",
+      "qa": "修改/HappyClaw/HappyClaw-面试QA.md::Q14",
+      "evidence_refs": [
+        "E01",
+        "E02",
+        "E13"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "Clawtide",
+      "bullet": 2,
+      "title": "Agent Profile 与配置变更",
+      "claim": "claim-happy-02",
+      "story": "HappyClaw-故事.md::R15",
+      "qa": "修改/HappyClaw/HappyClaw-面试QA.md::Q15",
+      "evidence_refs": [
+        "E03",
+        "E04",
+        "E05",
+        "E14"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "Clawtide",
+      "bullet": 3,
+      "title": "IM 适配与会话接入",
+      "claim": "claim-happy-03",
+      "story": "HappyClaw-故事.md::R07",
+      "qa": "修改/HappyClaw/HappyClaw-面试QA.md::Q07",
+      "evidence_refs": [
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "Clawtide",
+      "bullet": 4,
+      "title": "工作区授权与 IM 准入",
+      "claim": "claim-happy-04",
+      "story": "HappyClaw-故事.md::R20",
+      "qa": "修改/HappyClaw/HappyClaw-面试QA.md::Q20",
+      "evidence_refs": [
+        "E07",
+        "E10",
+        "E11",
+        "E15"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    },
+    {
+      "project": "Clawtide",
+      "bullet": 5,
+      "title": "会话认证与登录限流",
+      "claim": "claim-happy-05",
+      "story": "HappyClaw-故事.md::R19",
+      "qa": "修改/HappyClaw/HappyClaw-面试QA.md::Q19",
+      "evidence_refs": [
+        "E12",
+        "E16",
+        "E17"
+      ],
+      "status": "source_supported_user_attested_reproduction"
+    }
+  ],
+  "review_date": "2026-09-19",
+  "ownership_basis": "user_attested_reproduction",
+  "ownership_attestation": "修改/复审-2026-09-19/用户确认与使用边界.md"
+}

@@ -1,12 +1,12 @@
 # HappyClaw / Clawtide 当前定稿入口
 
-> 2026-09-18 复审。实现快照：`Bluuok/Clawtide@dde300313de851baa953f24f6a0f8c75e9cacd3f`。项目定位：个人自托管 Agent 应用；跨境电商是演示场景，不是商家接入或生产部署证明。
+> 2026-09-19 复审。实现快照：`Bluuok/Clawtide@dde300313de851baa953f24f6a0f8c75e9cacd3f`。项目定位：个人自托管 Agent 应用；跨境电商是演示场景，不是商家接入或生产部署证明。
 
 ## 1. 简历正文
 
 # Clawtide · 自托管数字员工工作站
 
-基于 HappyClaw 参考架构的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
+基于 HappyClaw 参考架构复现并实现的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
 
 **技术栈：** TypeScript、Node.js、Hono、SQLite、React、WebSocket、Claude Agent SDK。
 
@@ -32,10 +32,10 @@
 
 - [故事主线](HappyClaw-故事.md)与[完整八模块准备稿](修改/HappyClaw/HappyClaw-故事.md)。
 - [十五题 QA](修改/HappyClaw/HappyClaw-面试QA.md)、[源码导航](修改/HappyClaw/evidence/源码导航.md)。
-- [原有待补验证清单](修改/HappyClaw/HappyClaw-源码口径与待补验证.md)及[本轮复审](修改/复审-2026-09-18/README.md)。
+- [原有待补验证清单](修改/HappyClaw/HappyClaw-源码口径与待补验证.md)及[本轮技能对抗评审与额外逻辑终审](修改/复审-2026-09-19/README.md)。
 
 ## 5. 不能扩大成的能力
 
 两个 SDK 适配不等于七渠道已接通；everyone 普通消息可进入后续授权，不是默认 Owner-only。三个动作检查都返回 allow/deny，并非三个返回状态。短语确认只用于草稿发布，不覆盖普通 CRUD；Prompt 固定前导块和 PostToolUse 留痕不是工具执行前强制权限。Cookie、HMAC、资源授权与进程内限流各自有边界，不等于运行时沙箱或分布式安全。
 
-源码支持当前模块机制；个人贡献、真实模型/IM 联调与业务效果须单独提供记录。本文件不认领整个上游或 SDK 的开发，也不新增性能数字。
+源码支持当前模块机制；本人已确认围绕五点复现并实现，真实模型/IM 联调与业务效果仍分别记录。本文件不认领整个上游或 SDK 的开发，也不新增性能数字。

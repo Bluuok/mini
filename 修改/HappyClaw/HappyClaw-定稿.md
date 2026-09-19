@@ -1,13 +1,13 @@
 # HappyClaw / Clawtide 定稿：当前实现口径
 
-> 修订日期：2026-09-17。实际工程为 `Bluuok/Clawtide@dde300313de851baa953f24f6a0f8c75e9cacd3f`。本文件替代旧材料的对外叙述，不修改业务源码，也不宣称本人提交归属、真实模型调用和部署验收均已完成。
+> 修订日期：2026-09-19。实际工程为 `Bluuok/Clawtide@dde300313de851baa953f24f6a0f8c75e9cacd3f`。本人已确认围绕五个选点复现并实现；本文件按当前实现收束叙述，真实模型调用、联调与部署效果仍分别核验。
 > 执行规范：`.claude/skills/paidgroup-agent-resume-skill/SKILL.md` → `references/happyclaw/workflow.md`；采用 Scenario + Resume + Q&A + Story + 对抗自审。旧参考要点是索引，事实以当前实现为准。
 
 ## 1. 四字段与选点
 
 **项目名称：** Clawtide · 自托管数字员工工作站
 
-**项目简介：** 基于 HappyClaw 参考架构的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
+**项目简介：** 基于 HappyClaw 参考架构复现并实现的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
 
 **技术栈：** TypeScript、Node.js、Hono、SQLite、React、WebSocket、Claude Agent SDK
 
@@ -19,7 +19,7 @@
 
 # Clawtide · 自托管数字员工工作站
 
-基于 HappyClaw 参考架构的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
+基于 HappyClaw 参考架构复现并实现的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
 
 **技术栈：** TypeScript、Node.js、Hono、SQLite、React、WebSocket、Claude Agent SDK。
 
@@ -74,4 +74,4 @@ Node.js/TypeScript 用于服务与异步接入；Hono 承载 HTTP 路由；bette
 
 ## 7. 验证与待确认
 
-本轮完成材料重写、源码/测试定义核对和交付包一致性检查；产品测试、真实模型、IM 凭据与多进程故障联调未在本轮执行。个人起止时间、逐模块贡献、部署范围和演示记录仍由实际材料补齐。详细源码边界、待补测试与四维对抗审查见 `HappyClaw-场景与证据审计.md`、`HappyClaw-源码口径与待补验证.md`。
+本轮修订文稿并核对固定源码证据，五点个人复现实现已由本人确认；个人起止时间、部署范围和演示结果仍按各自记录说明。产品测试、真实模型、IM 与多进程故障联调未在本轮执行。当前材料检查与对抗评审结果见[2026-09-19复审](../复审-2026-09-19/README.md)；`HappyClaw-场景与证据审计.md`保留原轮次结论，`HappyClaw-源码口径与待补验证.md`提供产品待补验证项。

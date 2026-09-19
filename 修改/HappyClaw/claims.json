@@ -1,1 +1,132 @@
-{"schema_version": 1, "project": "Clawtide / HappyClaw", "source_commit": "dde300313de851baa953f24f6a0f8c75e9cacd3f", "date": "2026-09-17", "not_a_runtime_test_report": true, "claims": [{"id": "claim-happy-01", "point": "R14", "title": "任务物化与条件认领", "candidate_wording": "针对定时任务重复触发与执行记录难以追踪的问题，基于 SQLite 唯一键和条件更新，设计了 occurrence 物化、owner/token 认领及终态记录链路，实现了发生点去重与任务状态更新的条件校验。", "evidence_refs": ["E01", "E02", "E13"], "implementation_status": "source_present", "personal_attribution": "user_materials; individual code authorship not independently verified", "business_validation": "not_verified", "test_execution": "not_run_this_revision", "allowed_scope": "只主张数据库发生点与状态更新；不主张端到端 exactly-once、多活故障恢复或失租即时中止。", "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation", "qa_refs": ["Q14.1", "Q14.2", "Q14.3"]}, {"id": "claim-happy-02", "point": "R15", "title": "Agent Profile 与配置变更", "candidate_wording": "针对数字员工规则散落、局部修改易覆盖其他配置的问题，基于四段式 Prompt 与版本快照，设计了独立字段更新、历史内容恢复和草稿短语确认入口，实现了配置分段维护与历史可回看。", "evidence_refs": ["E03", "E04", "E05", "E14"], "implementation_status": "source_present", "personal_attribution": "user_materials; individual code authorship not independently verified", "business_validation": "not_verified", "test_execution": "not_run_this_revision", "allowed_scope": "短语确认仅针对草稿入口；普通 CRUD 不必经该入口。配置不是执行权限，发布与快照更新也非完整事务闭环。", "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation", "qa_refs": ["Q15.1", "Q15.2", "Q15.3"]}, {"id": "claim-happy-03", "point": "R07", "title": "IM 适配与会话接入", "candidate_wording": "针对不同 IM 消息格式和会话形态难以复用的问题，基于 ImChannelAdapter 与能力声明，设计了飞书、Telegram 适配及消息规范化链路，实现了渠道消息经挂载解析进入统一执行入口，其余渠道保留为骨架。", "evidence_refs": ["E06", "E07", "E08", "E09"], "implementation_status": "source_present", "personal_attribution": "user_materials; individual code authorship not independently verified", "business_validation": "not_verified", "test_execution": "not_run_this_revision", "allowed_scope": "两个真实 SDK 适配、五个骨架；不主张七渠道实连、功能对等、持久化投递重试或消息去重。", "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation", "qa_refs": ["Q07.1", "Q07.2", "Q07.3"]}, {"id": "claim-happy-04", "point": "R20", "title": "工作区授权与 IM 准入", "candidate_wording": "针对管理角色与资源归属混用的问题，基于所有者判定和发送者身份校验，设计了读、改、删独立授权函数与 audience_mode 准入分支，实现了管理员无所有权旁路、Home 禁删及拒绝分支不执行。", "evidence_refs": ["E07", "E10", "E11", "E15"], "implementation_status": "source_present", "personal_attribution": "user_materials; individual code authorship not independently verified", "business_validation": "not_verified", "test_execution": "not_run_this_revision", "allowed_scope": "三个操作各自返回 allow/deny，不是三种返回状态；everyone 普通消息可放行，/bind、/unbind 对所有人暂不执行。", "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation", "qa_refs": ["Q20.1", "Q20.2", "Q20.3"]}, {"id": "claim-happy-05", "point": "R19", "title": "会话认证与登录限流", "candidate_wording": "针对 Web 管理入口的身份冒用与重复登录尝试，基于随机会话 token、HMAC 签名和进程内计数，设计了签名核验后查库、双名 Cookie 及两层限流，实现了失效会话拒绝与账号维度的尝试约束。", "evidence_refs": ["E12", "E16", "E17"], "implementation_status": "source_present", "personal_attribution": "user_materials; individual code authorship not independently verified", "business_validation": "not_verified", "test_execution": "not_run_this_revision", "allowed_scope": "用户名+IP与跨IP用户名两个维度；进程内而非分布式；HMAC不加密，Cookie安全条件须按实际HTTPS部署验收。", "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation", "qa_refs": ["Q19.1", "Q19.2", "Q19.3"]}]}
+{
+  "schema_version": 1,
+  "project": "Clawtide / HappyClaw",
+  "source_commit": "dde300313de851baa953f24f6a0f8c75e9cacd3f",
+  "date": "2026-09-17",
+  "not_a_runtime_test_report": true,
+  "claims": [
+    {
+      "id": "claim-happy-01",
+      "point": "R14",
+      "title": "任务物化与条件认领",
+      "candidate_wording": "针对定时任务重复触发与执行记录难以追踪的问题，基于 SQLite 唯一键和条件更新，设计了 occurrence 物化、owner/token 认领及终态记录链路，实现了发生点去重与任务状态更新的条件校验。",
+      "evidence_refs": [
+        "E01",
+        "E02",
+        "E13"
+      ],
+      "implementation_status": "source_present",
+      "personal_attribution": "user_attested_reproduction: 2026-09-19 用户确认基于HappyClaw参考架构，按五点复现并实现Clawtide应用层能力。",
+      "business_validation": "not_verified",
+      "test_execution": "not_run_this_revision",
+      "allowed_scope": "只主张数据库发生点与状态更新；不主张端到端 exactly-once、多活故障恢复或失租即时中止。",
+      "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation",
+      "qa_refs": [
+        "Q14.1",
+        "Q14.2",
+        "Q14.3"
+      ],
+      "ownership_evidence": "修改/复审-2026-09-19/用户确认与使用边界.md",
+      "resume_usage": "personal_reproduction_implementation"
+    },
+    {
+      "id": "claim-happy-02",
+      "point": "R15",
+      "title": "Agent Profile 与配置变更",
+      "candidate_wording": "针对数字员工规则散落、局部修改易覆盖其他配置的问题，基于四段式 Prompt 与版本快照，设计了独立字段更新、历史内容恢复和草稿短语确认入口，实现了配置分段维护与历史可回看。",
+      "evidence_refs": [
+        "E03",
+        "E04",
+        "E05",
+        "E14"
+      ],
+      "implementation_status": "source_present",
+      "personal_attribution": "user_attested_reproduction: 2026-09-19 用户确认基于HappyClaw参考架构，按五点复现并实现Clawtide应用层能力。",
+      "business_validation": "not_verified",
+      "test_execution": "not_run_this_revision",
+      "allowed_scope": "短语确认仅针对草稿入口；普通 CRUD 不必经该入口。配置不是执行权限，发布与快照更新也非完整事务闭环。",
+      "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation",
+      "qa_refs": [
+        "Q15.1",
+        "Q15.2",
+        "Q15.3"
+      ],
+      "ownership_evidence": "修改/复审-2026-09-19/用户确认与使用边界.md",
+      "resume_usage": "personal_reproduction_implementation"
+    },
+    {
+      "id": "claim-happy-03",
+      "point": "R07",
+      "title": "IM 适配与会话接入",
+      "candidate_wording": "针对不同 IM 消息格式和会话形态难以复用的问题，基于 ImChannelAdapter 与能力声明，设计了飞书、Telegram 适配及消息规范化链路，实现了渠道消息经挂载解析进入统一执行入口，其余渠道保留为骨架。",
+      "evidence_refs": [
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ],
+      "implementation_status": "source_present",
+      "personal_attribution": "user_attested_reproduction: 2026-09-19 用户确认基于HappyClaw参考架构，按五点复现并实现Clawtide应用层能力。",
+      "business_validation": "not_verified",
+      "test_execution": "not_run_this_revision",
+      "allowed_scope": "两个真实 SDK 适配、五个骨架；不主张七渠道实连、功能对等、持久化投递重试或消息去重。",
+      "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation",
+      "qa_refs": [
+        "Q07.1",
+        "Q07.2",
+        "Q07.3"
+      ],
+      "ownership_evidence": "修改/复审-2026-09-19/用户确认与使用边界.md",
+      "resume_usage": "personal_reproduction_implementation"
+    },
+    {
+      "id": "claim-happy-04",
+      "point": "R20",
+      "title": "工作区授权与 IM 准入",
+      "candidate_wording": "针对管理角色与资源归属混用的问题，基于所有者判定和发送者身份校验，设计了读、改、删独立授权函数与 audience_mode 准入分支，实现了管理员无所有权旁路、Home 禁删及拒绝分支不执行。",
+      "evidence_refs": [
+        "E07",
+        "E10",
+        "E11",
+        "E15"
+      ],
+      "implementation_status": "source_present",
+      "personal_attribution": "user_attested_reproduction: 2026-09-19 用户确认基于HappyClaw参考架构，按五点复现并实现Clawtide应用层能力。",
+      "business_validation": "not_verified",
+      "test_execution": "not_run_this_revision",
+      "allowed_scope": "三个操作各自返回 allow/deny，不是三种返回状态；everyone 普通消息可放行，/bind、/unbind 对所有人暂不执行。",
+      "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation",
+      "qa_refs": [
+        "Q20.1",
+        "Q20.2",
+        "Q20.3"
+      ],
+      "ownership_evidence": "修改/复审-2026-09-19/用户确认与使用边界.md",
+      "resume_usage": "personal_reproduction_implementation"
+    },
+    {
+      "id": "claim-happy-05",
+      "point": "R19",
+      "title": "会话认证与登录限流",
+      "candidate_wording": "针对 Web 管理入口的身份冒用与重复登录尝试，基于随机会话 token、HMAC 签名和进程内计数，设计了签名核验后查库、双名 Cookie 及两层限流，实现了失效会话拒绝与账号维度的尝试约束。",
+      "evidence_refs": [
+        "E12",
+        "E16",
+        "E17"
+      ],
+      "implementation_status": "source_present",
+      "personal_attribution": "user_attested_reproduction: 2026-09-19 用户确认基于HappyClaw参考架构，按五点复现并实现Clawtide应用层能力。",
+      "business_validation": "not_verified",
+      "test_execution": "not_run_this_revision",
+      "allowed_scope": "用户名+IP与跨IP用户名两个维度；进程内而非分布式；HMAC不加密，Cookie安全条件须按实际HTTPS部署验收。",
+      "upstream_attribution": "HappyClaw reference architecture; Clawtide actual implementation",
+      "qa_refs": [
+        "Q19.1",
+        "Q19.2",
+        "Q19.3"
+      ],
+      "ownership_evidence": "修改/复审-2026-09-19/用户确认与使用边界.md",
+      "resume_usage": "personal_reproduction_implementation"
+    }
+  ]
+}

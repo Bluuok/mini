@@ -1,6 +1,6 @@
 # Clawtide · 自托管数字员工工作站
 
-基于 HappyClaw 参考架构的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
+基于 HappyClaw 参考架构复现并实现的个人项目，以跨境电商运营为演示场景，将 IM 消息与定时任务接入 Agent 执行链，并提供 Profile 配置、工作区授权和 Web 管理入口。
 
 **技术栈：** TypeScript、Node.js、Hono、SQLite、React、WebSocket、Claude Agent SDK。
 
