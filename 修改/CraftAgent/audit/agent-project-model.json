@@ -75,7 +75,7 @@
       "agent_layer": "Harness",
       "core_concept": "受限子 Agent 委派",
       "problem": "独立研究问题可并发，但扇出、超时和局部失败需要有界处理。",
-      "implementation": "独立 PiAgent 实例与工作目录，共享并发槽、每轮预算、叶子工具白名单、取消传播、allSettled 清理与报告持久化。",
+      "implementation": "创建独立 PiAgent 实例与工作目录，以单运行时共享并发槽、父运行累计子任务数和网页工具调用预算约束委派，另设子任务模型轮数与超时限制，并以叶子工具白名单禁止再次委派；传播取消信号，在子任务 finally 中执行清理并尝试保存终态报告，Promise.allSettled 等待各 runChild 落定后汇总结果或抛出错误。",
       "artifact": "delegate_research / ResearchSlots / ChildRecord",
       "artifact_evidence": [
         "packages/shared/src/research/tools.ts",
