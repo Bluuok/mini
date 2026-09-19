@@ -1,0 +1,438 @@
+{
+  "name": "material",
+  "cwd": "E:\\zzzz\\mini",
+  "command": "& 'C:\\Users\\ertstyuqk\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe' -X utf8 scripts/check_resume_review.py",
+  "exit_code": 0,
+  "result": {
+    "scope": "material structure/wording/links only; structural checks do not certify semantic support, product behavior, or independently verified authorship",
+    "ok": true,
+    "check_count": 84,
+    "checks": [
+      {
+        "name": "baseline_pinned",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "review_not_misattributed",
+        "ok": true,
+        "detail": "declaration in saved review; script executes no agents"
+      },
+      {
+        "name": "history_2026-09-18_flags_preserved",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "html_preserved",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "html_mirror",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "ten_unique_mappings",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "mapping_status_current",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "craft_gate",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "attestation_binding",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_attestation",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "source_pins",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "five_bullets_each",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-001:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-001:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-001:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-001:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-001:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-001:artifacts",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-002:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-002:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-002:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-002:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-002:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-002:artifacts",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-003:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-003:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-003:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-003:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-003:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-003:artifacts",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-004:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-004:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-004:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-004:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-004:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-004:artifacts",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-005:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-005:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-005:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-005:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-005:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-craft-005:artifacts",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-01:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-01:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-01:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-01:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-01:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-01:evidence",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-02:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-02:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-02:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-02:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-02:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-02:evidence",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-03:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-03:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-03:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-03:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-03:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-03:evidence",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-04:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-04:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-04:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-04:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-04:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-04:evidence",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-05:wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-05:clean",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-05:refs",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-05:story",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-05:three_qa",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "claim-happy-05:evidence",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "craft_qa_index",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_qa_index",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_four_fields",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_wording",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_qa_four_parts",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "story_tier_headings",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_nine_stages",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "Craft-故事.md:eight_modules",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "HappyClaw-故事.md:eight_modules",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "fixtures_not_results",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "happy_execution_claims",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "current_entry_links",
+        "ok": true,
+        "detail": []
+      }
+    ],
+    "business_tests_executed": false,
+    "independent_agents_executed": false,
+    "personal_authorship_verified": false,
+    "semantic_support_verified": false,
+    "external_link_targets": []
+  }
+}

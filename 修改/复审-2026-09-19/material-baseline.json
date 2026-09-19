@@ -1,0 +1,11 @@
+{
+  "review_date": "2026-09-19",
+  "material_base": "7fa4b34a08ba42867a4c39d2a705aee503654e92",
+  "html_blob": "09e579edc66eed1c5244a7dee957718a0a08fccd",
+  "previous_html_blob": "211398bef953cb0c87a4a4e28f74868ae5540b31",
+  "html_change_scope": "仅Happy/Craft两段项目简介及Craft累计预算措辞；样式、布局和其他项目内容不变。",
+  "source_commits": {
+    "ThreadCove": "6a49d19a024fcbc6cdabeaf8da8ccbf1953dfbb9",
+    "Clawtide": "dde300313de851baa953f24f6a0f8c75e9cacd3f"
+  }
+}
